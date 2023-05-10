@@ -1,36 +1,64 @@
-<template>Custom Title</template>
+<template>
+  <button @click="requestDataDump" style="cursor: pointer">
+    Trigger Data Dump
+  </button>
+</template>
 
 <script>
 export default {
+  data() {
+    return {
+      accessGranted: false,
+      midiAccess: null,
+    };
+  },
   mounted() {
-    console.log("mounted properly");
-    // Request access to MIDI devices
-    navigator
-      .requestMIDIAccess({
-        sysex: true,
-        software: false,
-      })
-      .then(onMIDISuccess, onMIDIFailure);
+    this.requestMidiAccess();
+  },
+  methods: {
+    async requestMidiAccess() {
+      try {
+        // Request access to MIDI devices
+        this.midiAccess = await navigator.requestMIDIAccess({
+          sysex: true,
+        });
+        this.accessGranted = true;
 
-    function onMIDISuccess(midiAccess) {
-      console.log("midi access granted", midiAccess);
-      // Get the first MIDI input device
-      const inputDevice = midiAccess.inputs.values().next().value;
-
-      // Set up a listener for incoming MIDI messages
-      inputDevice.onmidimessage = function (event) {
-        // Check if the message is a sysex message
-        if (event.data[0] == 0xf0) {
-          const sysexData = event.data.slice(1, -1); // Extract the sysex data
-          console.log("Received sysex message:", sysexData);
-          // Do something with the sysex data
-        }
-      };
-    }
-
-    function onMIDIFailure(error) {
-      console.warn("MIDI access denied:", error);
-    }
+        // TODO: user selectable input
+        this.midiAccess.inputs.forEach((input) => {
+          input.open().then(() => {
+            input.onmidimessage = function (e) {
+              if (e.data[0] != 0xf8) {
+                console.log("on midi message", e);
+              }
+            };
+          });
+        });
+      } catch (error) {
+        console.warn("MIDI access denied:", error);
+      }
+    },
+    requestDataDump() {
+      if (this.accessGranted && this.midiAccess) {
+        this.midiAccess.outputs.forEach((output) => {
+          output.open().then(() => {
+            console.log("output device", output);
+            // send sysex message to request current program data dump
+            let message = [
+              0xf0, // Start of Exclusive (Sysex) message
+              0x42, // Manufacturer ID (Korg)
+              0x30, // midi channel
+              0x00,
+              0x01,
+              0x51, // Command ID (CURRENT PROGRAM DATA DUMP REQUEST)
+              0x10,
+              0xf7, // End of Exclusive (Sysex) message
+            ];
+            output.send(message);
+          });
+        });
+      }
+    },
   },
 };
 </script>
