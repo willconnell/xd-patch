@@ -4,7 +4,7 @@
     style="width: 500px"
     src="./assets/miniloguexd.png"
   /><br />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <HelloWorld />
 </template>
 
 <script>
