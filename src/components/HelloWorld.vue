@@ -10,6 +10,7 @@ export default {
     return {
       accessGranted: false,
       midiAccess: null,
+      channel: 0, // todo: make user configurable
     };
   },
   mounted() {
@@ -42,12 +43,12 @@ export default {
       if (this.accessGranted && this.midiAccess) {
         this.midiAccess.outputs.forEach((output) => {
           output.open().then(() => {
-            console.log("output device", output);
+            const hexChannel = parseInt(`0x3${this.channel}`, 16);
             // send sysex message to request current program data dump
             let message = [
               0xf0, // Start of Exclusive (Sysex) message
               0x42, // Manufacturer ID (Korg)
-              0x30, // midi channel
+              hexChannel, // midi channel
               0x00,
               0x01,
               0x51, // Command ID (CURRENT PROGRAM DATA DUMP REQUEST)
