@@ -1,9 +1,10 @@
 <template>
   <img
-    alt="Vue logo"
+    alt="Korg Minilogue XD"
     style="width: 500px"
     src="./assets/miniloguexd.png"
-  /><br />
+  />
+  <br />
   <MinilogueXD />
 </template>
 

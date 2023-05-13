@@ -2,26 +2,18 @@
   <button @click="requestDataDump" style="cursor: pointer">
     Trigger Data Dump
   </button>
-  <v-btn>Test</v-btn>
-
-  <v-row>
-    <v-col>
-      <div style="width: 300px; text-align: left">
-        Inputs Deteced:
-        <ul v-for="device in inputs" :key="device">
-          <li style="">{{ device.name }}</li>
-        </ul>
-      </div>
-    </v-col>
-    <v-col>
-      <div style="width: 300px; text-align: left">
-        Outputs Deteced:
-        <ul v-for="device in outputs" :key="device">
-          <li style="">{{ device.name }}</li>
-        </ul>
-      </div>
-    </v-col>
-  </v-row>
+  <div style="width: 300px; text-align: left">
+    Inputs Deteced:
+    <ul v-for="device in inputs" :key="device">
+      <li style="">{{ device.name }}</li>
+    </ul>
+  </div>
+  <div style="width: 300px; text-align: left">
+    Outputs Deteced:
+    <ul v-for="device in outputs" :key="device">
+      <li style="">{{ device.name }}</li>
+    </ul>
+  </div>
 </template>
 
 <script>
