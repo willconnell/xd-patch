@@ -2,17 +2,22 @@
   <button @click="requestDataDump" style="cursor: pointer">
     Trigger Data Dump
   </button>
-  <div style="width: 300px; text-align: left">
-    Inputs Deteced:
-    <ul v-for="device in inputs" :key="device">
-      <li style="">{{ device.name }}</li>
-    </ul>
-  </div>
-  <div style="width: 300px; text-align: left">
-    Outputs Deteced:
-    <ul v-for="device in outputs" :key="device">
-      <li style="">{{ device.name }}</li>
-    </ul>
+
+  <div
+    style="display: flex; direction: column; position: absolute; bottom: 30px"
+  >
+    <div style="width: 300px; text-align: left">
+      Inputs Deteced:
+      <ul v-for="device in inputs" :key="device">
+        <li style="">{{ device.name }}</li>
+      </ul>
+    </div>
+    <div style="width: 300px; text-align: left">
+      Outputs Deteced:
+      <ul v-for="device in outputs" :key="device">
+        <li style="">{{ device.name }}</li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -54,6 +59,8 @@ export default {
             };
           });
         });
+        // add outputs to ref array
+        this.midiAccess.outputs.forEach((o) => this.outputs.push(o));
       } catch (error) {
         console.warn("MIDI access denied:", error);
       }
@@ -62,8 +69,6 @@ export default {
       if (this.accessGranted && this.midiAccess) {
         this.midiAccess.outputs.forEach((output) => {
           output.open().then(() => {
-            console.log("output", output);
-            this.outputs.push(output);
             const hexChannel = parseInt(`0x3${this.channel}`, 16);
             // send sysex message to request current program data dump
             let message = [
