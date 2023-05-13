@@ -4,16 +4,16 @@
     style="width: 500px"
     src="./assets/miniloguexd.png"
   /><br />
-  <HelloWorld />
+  <MinilogueXD />
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import MinilogueXD from "./components/MinilogueXD.vue";
 
 export default {
   name: "App",
   components: {
-    HelloWorld,
+    MinilogueXD,
   },
 };
 </script>
