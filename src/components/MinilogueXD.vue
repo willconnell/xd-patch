@@ -2,6 +2,17 @@
   <button @click="requestDataDump" style="cursor: pointer">
     Trigger Data Dump
   </button>
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <div style="width: 300px; text-align: left">
+    Devices Deteced:
+    <ul v-for="device in inputs" :key="device">
+      <li style="">{{ device.name }}</li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -11,6 +22,7 @@ export default {
       accessGranted: false,
       midiAccess: null,
       channel: 0, // todo: make user configurable
+      inputs: [],
     };
   },
   mounted() {
@@ -28,6 +40,7 @@ export default {
 
         // TODO: user selectable input
         this.midiAccess.inputs.forEach((input) => {
+          this.inputs.push(input);
           input.open().then(() => {
             input.onmidimessage = function (e) {
               if (e.data[0] === 0xf0) {
