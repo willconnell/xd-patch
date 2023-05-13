@@ -2,17 +2,26 @@
   <button @click="requestDataDump" style="cursor: pointer">
     Trigger Data Dump
   </button>
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <div style="width: 300px; text-align: left">
-    Devices Deteced:
-    <ul v-for="device in inputs" :key="device">
-      <li style="">{{ device.name }}</li>
-    </ul>
-  </div>
+  <v-btn>Test</v-btn>
+
+  <v-row>
+    <v-col>
+      <div style="width: 300px; text-align: left">
+        Inputs Deteced:
+        <ul v-for="device in inputs" :key="device">
+          <li style="">{{ device.name }}</li>
+        </ul>
+      </div>
+    </v-col>
+    <v-col>
+      <div style="width: 300px; text-align: left">
+        Outputs Deteced:
+        <ul v-for="device in outputs" :key="device">
+          <li style="">{{ device.name }}</li>
+        </ul>
+      </div>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -23,6 +32,7 @@ export default {
       midiAccess: null,
       channel: 0, // todo: make user configurable
       inputs: [],
+      outputs: [],
     };
   },
   mounted() {
@@ -60,6 +70,8 @@ export default {
       if (this.accessGranted && this.midiAccess) {
         this.midiAccess.outputs.forEach((output) => {
           output.open().then(() => {
+            console.log("output", output);
+            this.outputs.push(output);
             const hexChannel = parseInt(`0x3${this.channel}`, 16);
             // send sysex message to request current program data dump
             let message = [
