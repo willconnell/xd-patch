@@ -7,6 +7,8 @@
   </button>
   <br />
   <Knob :value="512" />
+  <Switch :value="parseInt(switchValue)" />
+  <input type="text" v-model="switchValue" />
   <div
     style="display: flex; direction: column; position: absolute; bottom: 30px"
   >
@@ -28,11 +30,13 @@
 <script>
 import parseSysex from "../utilities/sysex.js";
 import Knob from "./Interface/Knob";
+import Switch from "./Interface/Switch";
 
 export default {
-  components: { Knob },
+  components: { Knob, Switch },
   data() {
     return {
+      switchValue: 0,
       accessGranted: false,
       midiAccess: null,
       channel: 0, // todo: make user configurable

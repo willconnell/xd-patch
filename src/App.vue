@@ -1,9 +1,9 @@
 <template>
-  <!-- <img
+  <img
     alt="Korg Minilogue XD"
-    style="width: 300px"
+    style="width: 500px"
     src="./assets/miniloguexd.png"
-  /> -->
+  />
   <br />
   <MinilogueXD />
 </template>
