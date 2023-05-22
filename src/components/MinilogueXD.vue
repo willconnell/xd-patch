@@ -6,7 +6,8 @@
     Trigger Data Dump
   </button>
   <br />
-  <Knob />
+  <Knob :value="knobValue" />
+  <input type="text" v-model="knobValue" />
   <div
     style="display: flex; direction: column; position: absolute; bottom: 30px"
   >
@@ -33,6 +34,7 @@ export default {
   components: { Knob },
   data() {
     return {
+      knobValue: 1023,
       accessGranted: false,
       midiAccess: null,
       channel: 0, // todo: make user configurable

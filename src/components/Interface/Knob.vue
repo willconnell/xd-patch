@@ -1,5 +1,5 @@
 <template>
-  <svg class="knob" height="44" width="44" style="background-color: none">
+  <svg class="knob" height="44" width="44" :style="knobStyle">
     <circle
       cx="22"
       cy="22"
@@ -23,17 +23,22 @@
 export default {
   name: "Knob",
   props: {
+    // range from 0 to 1023, matching the minilogue XD's standard
     value: {
       type: Number,
       default: 0,
     },
   },
+  computed: {
+    knobStyle() {
+      return {
+        transition: "transform 1s",
+        transform: `rotate(${this.degRotation}deg)`,
+      };
+    },
+    degRotation() {
+      return (this.value / 1023) * 290 - 145;
+    },
+  },
 };
 </script>
-
-<style scoped>
-.knob {
-  transition: transform 1s;
-  transform: rotate(145deg);
-}
-</style>
