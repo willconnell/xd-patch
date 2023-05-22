@@ -7,7 +7,11 @@
   </button>
   <br />
   <Knob :value="512" />
-  <Switch :value="parseInt(switchValue)" />
+  <Switch
+    :value="parseInt(switchValue)"
+    :sideDots="true"
+    style="margin-left: 30px"
+  />
   <input type="text" v-model="switchValue" />
   <div
     style="display: flex; direction: column; position: absolute; bottom: 30px"

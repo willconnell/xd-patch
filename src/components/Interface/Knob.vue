@@ -16,7 +16,7 @@
       style="stroke: black; stroke-width: 1"
     />
   </svg>
-  <div>{{ label }}</div>
+  <div class="knobLabel">{{ label.toUpperCase() }}</div>
 </template>
 
 <script>
@@ -30,7 +30,7 @@ export default {
     },
     label: {
       type: String,
-      default: "Knob Label", // fixme: change to blank later
+      default: "portamento", // fixme: change to blank later
     },
     // size = height = width of svg
     size: {
@@ -51,3 +51,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.knobLabel {
+  font-size: 11px;
+}
+</style>
