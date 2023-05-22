@@ -5,7 +5,8 @@
   >
     Trigger Data Dump
   </button>
-
+  <br />
+  <Knob />
   <div
     style="display: flex; direction: column; position: absolute; bottom: 30px"
   >
@@ -26,8 +27,10 @@
 
 <script>
 import parseSysex from "../utilities/sysex.js";
+import Knob from "./Interface/Knob";
 
 export default {
+  components: { Knob },
   data() {
     return {
       accessGranted: false,
@@ -40,7 +43,6 @@ export default {
   },
   mounted() {
     this.requestMidiAccess();
-    testing();
   },
   methods: {
     async requestMidiAccess() {
@@ -1280,7 +1282,7 @@ export default {
         };
         let testRes = new Uint8Array(Object.values(x));
         console.log("test res", testRes);
-        vm.program = parseSysex(testRes);
+        this.program = parseSysex(testRes);
       }
     },
   },
