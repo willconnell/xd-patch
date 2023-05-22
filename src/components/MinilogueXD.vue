@@ -1370,6 +1370,50 @@ export default {
       program.modFxDepth = dataview.getInt16(97, true);
       program.delayIO = dataview.getInt8(99);
       program.delaySubTye = dataview.getInt8(100);
+      program.delayTime = dataview.getInt16(101, true);
+      program.delayDepth = dataview.getInt16(103, true);
+      program.reverbIO = dataview.getInt8(105);
+      program.reverbSubType = dataview.getInt8(106);
+      program.reverbTime = dataview.getInt16(107, true);
+      program.reverbDepth = dataview.getInt16(109, true);
+      program.bendRangePlus = dataview.getInt8(111);
+      program.bendRangeMinus = dataview.getInt8(112);
+
+      program.joystickAssignPlus = dataview.getInt8(113);
+      program.joystickRangePlus = dataview.getInt8(114);
+      program.joystickAssignMinus = dataview.getInt8(115);
+      program.joystickRangeMinus = dataview.getInt8(116);
+      program.cvInMode = dataview.getInt8(117);
+      program.cvIn1AssignPlus = dataview.getInt8(118);
+      program.cvIn1RangePlus = dataview.getInt8(119);
+      program.cvIn2AssignMinus = dataview.getInt8(120);
+      program.cvIn2RangeMinus = dataview.getInt8(121);
+      program.microTuning = dataview.getInt8(122);
+      program.scaleKey = dataview.getInt8(123);
+      program.programTuning = dataview.getInt8(124);
+      program.lfoKeySync = dataview.getInt8(125);
+      program.lfoVoiceSync = dataview.getInt8(126);
+      program.lfoTargetOsc = dataview.getInt8(127);
+      program.cutoffVelocity = dataview.getInt8(128);
+      program.ampVelocity = dataview.getInt8(129);
+      program.multiOctave = dataview.getInt8(130);
+      program.multiRouting = dataview.getInt8(131);
+      program.egLegato = dataview.getInt8(132);
+      program.portamentoMode = dataview.getInt8(133);
+      program.portamentoBpmSync = dataview.getInt8(134);
+      program.programLevel = dataview.getInt8(135);
+      program.vpmParam1 = dataview.getInt8(136); // feedback
+      program.vpmParam2 = dataview.getInt8(137); // noise depth
+      program.vpmParam3 = dataview.getInt8(138); // shapemodeint
+      program.vpmParam4 = dataview.getInt8(139); // mod attack
+      program.vpmParam5 = dataview.getInt8(140); // mod decay
+      program.vpmParam6 = dataview.getInt8(141); // modkeytrack
+      program.userParam1 = dataview.getInt8(142);
+      program.userParam2 = dataview.getInt8(143);
+      program.userParam3 = dataview.getInt8(144);
+      program.userParam4 = dataview.getInt8(145);
+      program.userParam5 = dataview.getInt8(146);
+      program.userParam6 = dataview.getInt8(147);
 
       return program;
     },
