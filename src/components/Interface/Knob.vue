@@ -1,22 +1,22 @@
 <template>
-  <svg class="knob" height="44" width="44" :style="knobStyle">
+  <svg class="knob" :height="size" :width="size" :style="knobStyle">
     <circle
-      cx="22"
-      cy="22"
-      r="20"
+      :cx="size / 2"
+      :cy="size / 2"
+      :r="size / 2 - 2"
       stroke="black"
       stroke-width="1"
       fill="none"
     />
     <line
-      x1="22"
-      y1="2"
-      x2="22"
-      y2="22"
+      :x1="size / 2"
+      :y1="2"
+      :x2="size / 2"
+      :y2="size / 2"
       style="stroke: black; stroke-width: 1"
     />
   </svg>
-  <div>Knob Label</div>
+  <div>{{ label }}</div>
 </template>
 
 <script>
@@ -27,6 +27,15 @@ export default {
     value: {
       type: Number,
       default: 0,
+    },
+    label: {
+      type: String,
+      default: "Knob Label", // fixme: change to blank later
+    },
+    // size = height = width of svg
+    size: {
+      type: Number,
+      default: 44,
     },
   },
   computed: {
