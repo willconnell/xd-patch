@@ -1310,7 +1310,6 @@ export default {
       const dataview = new DataView(converted.buffer);
       const decoder = new TextDecoder("utf-8");
       const program = {};
-      console.log("dv", dataview);
 
       program.prog = decoder.decode(converted.subarray(0, 4));
       program.progName = decoder.decode(converted.subarray(4, 16));
@@ -1318,6 +1317,60 @@ export default {
       program.portamento = dataview.getInt8(17);
       program.keyTrig = dataview.getInt8(18);
       program.voiceModeDepth = dataview.getInt16(19, true); // little endian
+      program.voiceModeType = dataview.getInt8(21);
+      program.vco1Wave = dataview.getInt8(22);
+      program.vco1Octave = dataview.getInt8(23);
+      program.vco1Pitch = dataview.getInt16(24, true);
+      program.vco1Shape = dataview.getInt16(26, true);
+      program.vco2Wave = dataview.getInt8(28);
+      program.vco2Octave = dataview.getInt8(29);
+      program.vco2Pitch = dataview.getInt16(30, true);
+      program.vco2Shape = dataview.getInt16(32, true);
+      program.sync = dataview.getInt8(34);
+      program.ring = dataview.getInt8(35);
+      program.crossModDepth = dataview.getInt16(36, true);
+      program.multiType = dataview.getInt8(38);
+      program.selectNoise = dataview.getInt8(39);
+      program.selectVPM = dataview.getInt8(40);
+      program.selectUser = dataview.getInt8(41);
+      program.shapeNoise = dataview.getInt16(42, true);
+      program.shapeVPM = dataview.getInt16(44, true);
+      program.shapeUser = dataview.getInt16(46, true);
+      program.shiftShapeNoise = dataview.getInt16(48, true);
+      program.shiftShapeVPM = dataview.getInt16(50, true);
+      program.shiftShapeUser = dataview.getInt16(52, true);
+      program.vco1Level = dataview.getInt16(54, true);
+      program.vco2Level = dataview.getInt16(56, true);
+      program.multiLevel = dataview.getInt16(58, true);
+      program.cutoff = dataview.getInt16(60, true);
+      program.resonance = dataview.getInt16(62, true);
+      program.cutoffDrive = dataview.getInt8(64);
+      program.cutoffKeyTrack = dataview.getInt8(65);
+      program.ampEGAttack = dataview.getInt16(66, true);
+      program.ampEGDecay = dataview.getInt16(68, true);
+      program.ampEGSustain = dataview.getInt16(70, true);
+      program.ampEGRelease = dataview.getInt16(72, true);
+      program.egAttack = dataview.getInt16(74, true);
+      program.egDecay = dataview.getInt16(76, true);
+      program.egInt = dataview.getInt16(78, true);
+      program.egTarget = dataview.getInt8(80); // 0~2=CUTOFF, PITCH2, PITCH
+      program.lfoWave = dataview.getInt8(81);
+      program.lfoMode = dataview.getInt8(82); // 0~2=1-SHOT,NORMAL,BPM
+      program.lfoRate = dataview.getInt16(83, true);
+      program.lfoInt = dataview.getInt16(85, true);
+      program.lfoTarget = dataview.getInt8(87); // 0~2=CUTOFF,SHAPE,PITCH
+      program.modFxIO = dataview.getInt8(88);
+      program.modFxType = dataview.getInt8(89);
+      program.modFxChorus = dataview.getInt8(90);
+      program.modFxEnsemble = dataview.getInt8(91);
+      program.modFxPhaser = dataview.getInt8(92);
+      program.modFxFlanger = dataview.getInt8(93);
+      program.modFxUser = dataview.getInt8(94);
+      program.modFxTime = dataview.getInt16(95, true);
+      program.modFxDepth = dataview.getInt16(97, true);
+      program.delayIO = dataview.getInt8(99);
+      program.delaySubTye = dataview.getInt8(100);
+
       return program;
     },
   },
