@@ -1286,7 +1286,7 @@ export default {
       const converted = this.convertSysex(data);
       console.log("converted 8 bit data", converted);
       const program = this.createProgramObj(converted);
-      console.log("program json", program);
+      console.log("program obj", program);
     },
     convertSysex(input) {
       let output = [];
@@ -1306,34 +1306,18 @@ export default {
       const currentProgramDataDump = [0xf0, 0x42, 0x30, 0x00, 0x01, 0x51, 0x40];
       return header.every((val, i) => val === currentProgramDataDump[i]);
     },
-    binaryToAscii(binary) {
-      // Split the binary string into chunks of 8 bits
-      const binaryChunks = binary.match(/.{1,8}/g);
-
-      // Convert each binary chunk to decimal and then to ASCII character
-      const asciiChars = binaryChunks.map((chunk) =>
-        String.fromCharCode(parseInt(chunk, 2))
-      );
-
-      // Join the ASCII characters to form the final string
-      const asciiString = asciiChars.join("");
-
-      return asciiString;
-    },
     createProgramObj(converted) {
-      let program = {};
+      const dataview = new DataView(converted.buffer);
+      const decoder = new TextDecoder("utf-8");
+      const program = {};
+      console.log("dv", dataview);
 
-      let offset = 0;
-      for (const byte of converted) {
-        // switch (offset) {
-        //   case 0:
-        //     program['prog'] = this.
-        // }
-
-        // offset += 1;
-        console.log("byte", byte);
-      }
-
+      program.prog = decoder.decode(converted.subarray(0, 4));
+      program.progName = decoder.decode(converted.subarray(4, 16));
+      program.octave = dataview.getInt8(16);
+      program.portamento = dataview.getInt8(17);
+      program.keyTrig = dataview.getInt8(18);
+      program.voiceModeDepth = dataview.getInt16(19, true); // little endian
       return program;
     },
   },
