@@ -51,6 +51,7 @@ export default {
           input.open().then(() => {
             input.onmidimessage = function (e) {
               if (e.data[0] === 0xf0) {
+                console.log("REAL MIDI DATA");
                 console.log("sysex response", e);
                 vm.parseSysex(e.data);
               } else if (e.data[0] != 0xf8) {
@@ -86,6 +87,7 @@ export default {
         });
       }
 
+      // use test data when no midi device connected
       if (this.inputs.length === 0 && this.outputs.length === 0) {
         console.log("TEST DATA");
         const x = {
@@ -1276,69 +1278,17 @@ export default {
     parseSysex(sysexResponse) {
       const header = sysexResponse.slice(0, 7);
       const data = sysexResponse.slice(7, sysexResponse.length);
+      let headerString = "header: ";
+      if (this.isDataDump(header)) headerString += "is data dump";
+      else headerString += "not data dump";
+      console.log(headerString);
 
-      let headerString = "";
-      for (let i = 0; i < 7; i++) {
-        headerString += header[i].toString(16);
-      }
-      console.log("header:", headerString);
-
-      // const converted = this.decode_sysex(data);
-      // const sm = this.convert7BitToMidi(data);
-      // const sm2 = this.convertToMidiData(data);
-      const converted = this.convertMidiTo8Bit(data);
-
-      const characterMapping = {
-        32: " ",
-        33: "!",
-        35: "#",
-        36: "$",
-        37: "%",
-        38: "&",
-        39: "'",
-        40: "(",
-        41: ")",
-        42: "*",
-        44: ",",
-        45: "-",
-        46: ".",
-        47: "/",
-        58: ":",
-        63: "?",
-      };
-
-      for (let i = 48; i <= 57; i++) {
-        characterMapping[i] = String.fromCharCode(i);
-      }
-
-      for (let i = 65; i <= 90; i++) {
-        characterMapping[i] = String.fromCharCode(i);
-      }
-
-      for (let i = 97; i <= 122; i++) {
-        characterMapping[i] = String.fromCharCode(i);
-      }
-
-      console.log("7 bit to 8 bit conversion");
-      for (let i = 4; i < converted.length; i++) {
-        console.log(
-          converted[i],
-          characterMapping[converted[i]],
-          // converted[i].toString(16),
-          // converted[i].toString(2),
-          this.binaryToAscii(converted[i].toString(2))
-        );
-        // console.log(
-        //   `og,c1,7m: ${data[i].toString(16)}, ${converted[i].toString(
-        //     16
-        //   )}, ${sevenToMidi[i].toString(16)}`
-        // );
-      }
-      // for (let i = 0; i < 15; i++) {
-      //   console.log(`og,c1: ${data[i]}, ${converted[i]}, ${sm[i]}, ${sm2[i]}`);
-      // }
+      const converted = this.convertSysex(data);
+      console.log("converted 8 bit data", converted);
+      const program = this.createProgramObj(converted);
+      console.log("program json", program);
     },
-    decode_sysex(input) {
+    convertSysex(input) {
       let output = [];
       for (let i = 0; i < input.length; i += 8) {
         let chunk = input.slice(i, i + 8);
@@ -1350,77 +1300,7 @@ export default {
           leftShift -= 1;
         }
       }
-      return output;
-    },
-    // convert7BitToMidi(input) {
-    //   const inputLength = input.length;
-    //   const outputLength = (inputLength * 8) / 7;
-    //   const output = new Uint8Array(outputLength);
-
-    //   let inputIndex = 0;
-    //   let outputIndex = 0;
-    //   let bitOffset = 0;
-    //   let currentByte = 0;
-
-    //   while (inputIndex < inputLength && outputIndex < outputLength) {
-    //     const byte = input[inputIndex];
-    //     currentByte |= byte << bitOffset;
-    //     bitOffset += 7;
-
-    //     while (bitOffset >= 8) {
-    //       output[outputIndex] = currentByte & 0xff;
-    //       currentByte >>= 8;
-    //       bitOffset -= 8;
-    //       outputIndex++;
-    //     }
-
-    //     inputIndex++;
-    //   }
-
-    //   if (bitOffset > 0 && outputIndex < outputLength) {
-    //     output[outputIndex] = currentByte & 0xff;
-    //   }
-
-    //   return output;
-    // },
-    // convertToMidiData(input) {
-    //   let output = [];
-    //   for (let i = 0; i < input.length; i += 7) {
-    //     let chunk = input.slice(i, i + 7);
-    //     let midiByte1 =
-    //       ((chunk[6] & 0b00000001) << 6) | (chunk[5] & 0b01111111);
-    //     let midiByte2 =
-    //       ((chunk[4] & 0b01111111) << 1) | ((chunk[3] & 0b10000000) >> 7);
-    //     let midiByte3 =
-    //       ((chunk[3] & 0b01111110) >> 1) | (chunk[2] & 0b00000001);
-    //     let midiByte4 =
-    //       ((chunk[1] & 0b00000001) << 6) | (chunk[0] & 0b01111111);
-    //     output.push(midiByte1, midiByte2, midiByte3, midiByte4);
-    //   }
-    //   return output;
-    // },
-    convertMidiTo8Bit(inputData) {
-      const outputData = [];
-      const numSets = Math.floor(inputData.length / 8);
-
-      for (let i = 0; i < numSets; i++) {
-        const startIdx = i * 8;
-
-        // Convert the first byte
-        const firstByte =
-          (inputData[startIdx] << 1) | (inputData[startIdx + 1] >> 6);
-        outputData.push(firstByte);
-
-        // Convert the remaining bytes
-        for (let j = 1; j < 8; j++) {
-          const byte =
-            ((inputData[startIdx + j - 1] << (j + 1)) & 0x7f) |
-            (inputData[startIdx + j] >> (6 - j));
-          outputData.push(byte);
-        }
-      }
-
-      return outputData;
+      return new Uint8Array(output);
     },
     isDataDump(header) {
       const currentProgramDataDump = [0xf0, 0x42, 0x30, 0x00, 0x01, 0x51, 0x40];
@@ -1439,6 +1319,22 @@ export default {
       const asciiString = asciiChars.join("");
 
       return asciiString;
+    },
+    createProgramObj(converted) {
+      let program = {};
+
+      let offset = 0;
+      for (const byte of converted) {
+        // switch (offset) {
+        //   case 0:
+        //     program['prog'] = this.
+        // }
+
+        // offset += 1;
+        console.log("byte", byte);
+      }
+
+      return program;
     },
   },
 };
