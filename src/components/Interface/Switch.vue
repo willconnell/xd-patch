@@ -1,6 +1,6 @@
 <template>
-  <div class="switchWrapper">
-    <div class="switch">
+  <div class="switchWrapper" :style="switchWrapper">
+    <div class="switch" :style="switchStyle">
       <div class="switchOutline">
         <div class="selector" :style="selectorStyle"></div>
       </div>
@@ -48,6 +48,11 @@
           fill="none"
         />
       </svg>
+      <div v-if="dotLabels.length" class="dotLabels">
+        <div v-for="label in dotLabels" :key="label">
+          {{ label.toUpperCase() }}<br />
+        </div>
+      </div>
     </div>
     <div class="label" :style="labelStyle">{{ label.toUpperCase() }}</div>
   </div>
@@ -107,6 +112,13 @@ export default {
             marginTop: "3px",
           };
     },
+    switchStyle() {
+      return this.dots && this.dotLabels.length ? {} : { width: "33px" };
+    },
+    // conditional style that does not apply to switches with dot Labels
+    switchWrapper() {
+      return !this.dotLabels.length ? { width: "50px" } : {};
+    },
   },
 };
 </script>
@@ -135,7 +147,6 @@ export default {
 .switch {
   display: flex;
   flex-direction: row;
-  width: 33px;
   margin: auto;
 }
 .dots {
@@ -144,9 +155,6 @@ export default {
 .switchWrapper {
   display: block;
   margin: auto;
-  width: 50px;
-  /* fixme */
-  /* background-color: rgba(255, 0, 0, 0.29); */
 }
 .label {
   margin-top: 3px;
@@ -163,5 +171,14 @@ export default {
   text-align: left;
   margin-top: 4px;
   margin-left: 2px;
+}
+.dotLabels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 5px;
+  text-align: left;
+  margin-left: 2px;
+  /* fixme: make generic class to combine elements of dotLabels and labels */
 }
 </style>

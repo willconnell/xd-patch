@@ -7,7 +7,12 @@
     <div class="voice section">
       <Knob label="portamento" />
       <Knob label="voice mode depth" :value="prog?.voiceModeDepth" />
-      <Switch :dots="true" :value="prog?.voiceModeType - 1" :positions="4" />
+      <Switch
+        :dots="true"
+        :dotLabels="['poly', 'unison', 'chord', 'arp']"
+        :value="prog?.voiceModeType - 1"
+        :positions="4"
+      />
     </div>
     <div class="oscillators section">
       <div class="row">
