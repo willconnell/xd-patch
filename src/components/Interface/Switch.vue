@@ -20,28 +20,28 @@
           :cy="sdRad + 1"
           :r="sdRad"
           style="stroke: var(--text-primary-color); stroke-width: : 1px;"
-          fill="none"
+          :fill="value === 3 ? 'var(--text-primary-color)' : 'none'"
         />
         <circle
           :cx="sdRad + 1"
           :cy="sdRad + 1 + (sdRad * 3 - sdRad * (1 / 5))"
           :r="sdRad"
           style="stroke: var(--text-primary-color); stroke-width: : 1px;"
-          fill="none"
+          :fill="value === 2 ? 'var(--text-primary-color)' : 'none'"
         />
         <circle
           :cx="sdRad + 1"
           :cy="sdRad + 1 + 2 * (sdRad * 3 - sdRad * (1 / 5))"
           :r="sdRad"
           style="stroke: var(--text-primary-color); stroke-width: : 1px;"
-          fill="none"
+          :fill="value === 1 ? 'var(--text-primary-color)' : 'none'"
         />
         <circle
           :cx="sdRad + 1"
           :cy="sdRad + 1 + 3 * (sdRad * 3 - sdRad * (1 / 5))"
           :r="sdRad"
           style="stroke: var(--text-primary-color); stroke-width: : 1px;"
-          fill="none"
+          :fill="value === 0 ? 'var(--text-primary-color)' : 'none'"
         />
       </svg>
       <div v-if="dotLabels.length" class="dotLabels">

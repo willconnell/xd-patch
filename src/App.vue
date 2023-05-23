@@ -33,11 +33,15 @@ export default {
   },
   watch: {
     isDark() {
-      if (this.isDark) {
-        document.documentElement.className = "dark-theme";
-      } else {
-        document.documentElement.className = "light-theme";
-      }
+      this.setTheme();
+    },
+  },
+  mounted() {
+    this.setTheme();
+  },
+  methods: {
+    setTheme() {
+      document.documentElement.className = this.isDark ? "dark-theme" : "";
     },
   },
 };

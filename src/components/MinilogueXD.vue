@@ -193,14 +193,17 @@
     next steps:
       -------adding labels to poly/chord/latch switch
       -------implement dark mode toggle
-      dark mode styling
       labeling different sections
+      dark mode styling
+      create nice dark mode switch
       matching height of "drive" and "key track" switches
       calibrate knob clock positions to actual minilogue's
-  
-  
-  
-  
+      fix weird gap in some switches in bottom position
+      -------add fill to side dots
+      style side dot fill to look like a glowing light
+      investigate why poly/unison switch defaults to top position
+      midi channel selector
+      figure out how input/output midi UI will look
   -->
 </template>
 
