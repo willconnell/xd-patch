@@ -18,7 +18,7 @@
     <div class="divider"></div>
     <div class="oscillators section">
       <div class="secTitle">SECTION</div>
-      <div class="row">
+      <div class="row sr">
         <Switch
           label="wave"
           :labels="['saw', 'tri', 'sqr']"
@@ -39,7 +39,7 @@
       </div>
       <div class="secTitle">SECTION</div>
 
-      <div class="row">
+      <div class="row sr">
         <Switch
           label="wave"
           :labels="['saw', 'tri', 'sqr']"
@@ -57,7 +57,7 @@
       </div>
       <div class="secTitle">SECTION</div>
 
-      <div class="row">
+      <div class="row sr">
         <Switch
           label="wave"
           :labels="['usr', 'vpm', 'noi']"
@@ -81,8 +81,12 @@
       <Knob label="cutoff" :value="prog?.cutoff" />
       <Knob label="resonance" :value="prog?.resonance" />
       <div class="row">
-        <!-- fixme: fix layout here -->
-        <Switch label="drive" :value="prog?.cutoffDrive" />
+        <!-- manually bump up drive to match key track height -->
+        <Switch
+          label="drive"
+          :value="prog?.cutoffDrive"
+          style="margin-top: 0px"
+        />
         <Switch label="key track" :value="prog?.cutoffKeyTrack" />
       </div>
     </div>
@@ -90,7 +94,7 @@
     <div class="modulation section">
       <div class="secTitle">SECTION</div>
 
-      <div class="row">
+      <div class="row sr">
         <Knob label="attack" :value="prog?.ampEGAttack" />
         <Knob label="decay" :value="prog?.ampEGDecay" />
         <Knob label="sustain" :value="prog?.ampEGSustain" />
@@ -98,7 +102,7 @@
       </div>
       <div class="secTitle">SECTION</div>
 
-      <div class="row">
+      <div class="row sr">
         <Knob label="attack" :value="prog?.egAttack" />
         <Knob label="decay" :value="prog?.egDecay" />
         <Knob label="eg int" :value="prog?.egInt" />
@@ -110,7 +114,7 @@
       </div>
       <div class="secTitle">SECTION</div>
 
-      <div class="row">
+      <div class="row sr">
         <Switch
           label="wave"
           :labels="['usr', 'vpm', 'noi']"
@@ -213,10 +217,10 @@
       -------adding labels to poly/chord/latch switch
       -------implement dark mode toggle
       labeling different sections
-      dark mode styling
-      create nice dark mode switch
-      matching height of "drive" and "key track" switches
-      calibrate knob clock positions to actual minilogue's
+      -------dark mode styling
+      -------create nice dark mode switch
+      -------matching height of "drive" and "key track" switches
+      fix odd spreading of voice section; why is voice type switch so tall?
       fix weird gap in some switches in bottom position
       -------add fill to side dots
       style side dot fill to look like a glowing light
@@ -1523,5 +1527,8 @@ export default {
 .secTitle {
   font-size: 12px;
   margin-bottom: -7px;
+}
+.sr {
+  margin-bottom: 15px;
 }
 </style>
