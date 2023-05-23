@@ -5,8 +5,7 @@
         :cx="size / 2"
         :cy="size / 2"
         :r="size / 2 - 2"
-        stroke="black"
-        stroke-width="1"
+        style="stroke: var(--text-primary-color); stroke-width: : 1;"
         fill="none"
       />
       <line
@@ -14,7 +13,7 @@
         :y1="2"
         :x2="size / 2"
         :y2="size / 2"
-        style="stroke: black; stroke-width: 1"
+        style="stroke: var(--text-primary-color); stroke-width: 1"
       />
     </svg>
     <div class="knobLabel">{{ label.toUpperCase() }}</div>

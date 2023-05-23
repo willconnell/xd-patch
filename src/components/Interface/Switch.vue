@@ -19,32 +19,28 @@
           :cx="sdRad + 1"
           :cy="sdRad + 1"
           :r="sdRad"
-          stroke="black"
-          stroke-width="1px"
+          style="stroke: var(--text-primary-color); stroke-width: : 1px;"
           fill="none"
         />
         <circle
           :cx="sdRad + 1"
           :cy="sdRad + 1 + (sdRad * 3 - sdRad * (1 / 5))"
           :r="sdRad"
-          stroke="black"
-          stroke-width="1px"
+          style="stroke: var(--text-primary-color); stroke-width: : 1px;"
           fill="none"
         />
         <circle
           :cx="sdRad + 1"
           :cy="sdRad + 1 + 2 * (sdRad * 3 - sdRad * (1 / 5))"
           :r="sdRad"
-          stroke="black"
-          stroke-width="1px"
+          style="stroke: var(--text-primary-color); stroke-width: : 1px;"
           fill="none"
         />
         <circle
           :cx="sdRad + 1"
           :cy="sdRad + 1 + 3 * (sdRad * 3 - sdRad * (1 / 5))"
           :r="sdRad"
-          stroke="black"
-          stroke-width="1px"
+          style="stroke: var(--text-primary-color); stroke-width: : 1px;"
           fill="none"
         />
       </svg>
@@ -130,7 +126,7 @@ export default {
   width: 14px;
   height: 40px;
   border-radius: 10px;
-  border-color: black;
+  border-color: var(--text-primary-color);
   border-width: 1px;
   border-style: solid;
   margin-top: 1px;
@@ -139,7 +135,7 @@ export default {
   height: 12px;
   width: 12px;
   border-radius: 100%;
-  border-color: black;
+  border-color: var(--text-primary-color);
   border-width: 1px;
   border-style: solid;
   transition: margin-top 0.7s;

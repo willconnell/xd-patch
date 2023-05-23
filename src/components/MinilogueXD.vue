@@ -4,6 +4,7 @@
       <Knob label="master" />
       <Knob label="tempo" />
     </div>
+    <div class="divider"></div>
     <div class="voice section">
       <Knob label="portamento" />
       <Knob label="voice mode depth" :value="prog?.voiceModeDepth" />
@@ -14,6 +15,7 @@
         :positions="4"
       />
     </div>
+    <div class="divider"></div>
     <div class="oscillators section">
       <div class="row">
         <Switch
@@ -61,11 +63,13 @@
         <Knob label="shape" />
       </div>
     </div>
+    <div class="divider"></div>
     <div class="mixer section">
       <Knob label="vco 1" :value="prog?.vco1Level" />
       <Knob label="vco 2" :value="prog?.vco2Level" />
       <Knob label="multi" :value="prog?.multiLevel" />
     </div>
+    <div class="divider"></div>
     <div class="filter section">
       <Knob label="cutoff" :value="prog?.cutoff" />
       <Knob label="resonance" :value="prog?.resonance" />
@@ -75,6 +79,7 @@
         <Switch label="key track" :value="prog?.cutoffKeyTrack" />
       </div>
     </div>
+    <div class="divider"></div>
     <div class="modulation section">
       <div class="row">
         <Knob label="attack" :value="prog?.ampEGAttack" />
@@ -112,6 +117,7 @@
         />
       </div>
     </div>
+    <div class="divider"></div>
     <div class="effects section">
       <div class="row">
         <!-- fixme: configure sub types for FX later -->
@@ -153,18 +159,18 @@
 
   <button
     @click="requestDataDump"
-    style="cursor: pointer; display: block; margin: auto"
+    style="
+      cursor: pointer;
+      display: block;
+      margin: auto;
+      background-color: var(--background-color-secondary);
+      color: var(--text-primary-color);
+      border: none;
+    "
   >
     Trigger Data Dump
   </button>
-  <!-- <br />
-  <Knob :value="512" />
-  <Switch
-    :value="parseInt(switchValue)"
-    :sideDots="true"
-    style="margin-left: 30px"
-  />
-  <input type="text" v-model="switchValue" />
+  <!--
   <div
     style="display: flex; direction: column; position: absolute; bottom: 30px"
   >
@@ -180,14 +186,17 @@
         <li style="">{{ device.name }}</li>
       </ul>
     </div>
-  </div> -->
+  </div>
+  -->
 
   <!-- 
     next steps:
-      adding labels to poly/chord/latch switch
-      labeling different sections
+      -------adding labels to poly/chord/latch switch
+      -------implement dark mode toggle
       dark mode styling
+      labeling different sections
       matching height of "drive" and "key track" switches
+      calibrate knob clock positions to actual minilogue's
   
   
   
@@ -1463,19 +1472,20 @@ export default {
 </script>
 
 <style scoped>
+.divider {
+  border-right: 1px solid var(--text-primary-color);
+}
 .mainInterface {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  /* background-color: var(--background-color-secondary); */
 }
 .section {
-  border-right: 1px solid gray;
-  border-left: 1px solid gray;
   padding: 1px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.18);
 }
 .row {
   display: flex;
@@ -1484,7 +1494,7 @@ export default {
 }
 .multiEngine {
   margin: auto;
-  border: solid 1px black;
+  border: solid 1px var(--text-primary-color);
   width: 200px;
   height: 30px;
 }
