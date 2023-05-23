@@ -17,6 +17,7 @@
     </div>
     <div class="divider"></div>
     <div class="oscillators section">
+      <div class="secTitle">SECTION</div>
       <div class="row">
         <Switch
           label="wave"
@@ -36,6 +37,8 @@
           <Switch label="ring" :positions="2" :value="prog?.ring" />
         </div>
       </div>
+      <div class="secTitle">SECTION</div>
+
       <div class="row">
         <Switch
           label="wave"
@@ -52,6 +55,8 @@
         <Knob label="shape" :value="prog?.vco2Shape" />
         <Knob label="cross mod depth" :value="prog?.crossModDepth" />
       </div>
+      <div class="secTitle">SECTION</div>
+
       <div class="row">
         <Switch
           label="wave"
@@ -65,12 +70,14 @@
     </div>
     <div class="divider"></div>
     <div class="mixer section">
+      <div class="secTitle">SECTION</div>
       <Knob label="vco 1" :value="prog?.vco1Level" />
       <Knob label="vco 2" :value="prog?.vco2Level" />
       <Knob label="multi" :value="prog?.multiLevel" />
     </div>
     <div class="divider"></div>
     <div class="filter section">
+      <div class="secTitle">SECTION</div>
       <Knob label="cutoff" :value="prog?.cutoff" />
       <Knob label="resonance" :value="prog?.resonance" />
       <div class="row">
@@ -81,12 +88,16 @@
     </div>
     <div class="divider"></div>
     <div class="modulation section">
+      <div class="secTitle">SECTION</div>
+
       <div class="row">
         <Knob label="attack" :value="prog?.ampEGAttack" />
         <Knob label="decay" :value="prog?.ampEGDecay" />
         <Knob label="sustain" :value="prog?.ampEGSustain" />
         <Knob label="release" :value="prog?.ampEGRelease" />
       </div>
+      <div class="secTitle">SECTION</div>
+
       <div class="row">
         <Knob label="attack" :value="prog?.egAttack" />
         <Knob label="decay" :value="prog?.egDecay" />
@@ -97,6 +108,8 @@
           :value="prog?.egTarget"
         />
       </div>
+      <div class="secTitle">SECTION</div>
+
       <div class="row">
         <Switch
           label="wave"
@@ -119,6 +132,8 @@
     </div>
     <div class="divider"></div>
     <div class="effects section">
+      <div class="secTitle">SECTION</div>
+
       <div class="row">
         <!-- fixme: configure sub types for FX later -->
         <Switch
@@ -130,6 +145,8 @@
         <Knob label="time" :value="prog?.modFxTime" />
         <Knob label="depth" :value="prog?.modFxDepth" />
       </div>
+      <div class="secTitle">SECTION</div>
+
       <div class="row">
         <Switch
           label="rev"
@@ -140,6 +157,8 @@
         <Knob label="time" :value="prog?.reverbTime" />
         <Knob label="depth" :value="prog?.reverbDepth" />
       </div>
+      <div class="secTitle">SECTION</div>
+
       <div class="row">
         <Switch
           label="del"
@@ -1500,5 +1519,9 @@ export default {
   border: solid 1px var(--text-primary-color);
   width: 200px;
   height: 30px;
+}
+.secTitle {
+  font-size: 12px;
+  margin-bottom: -7px;
 }
 </style>
