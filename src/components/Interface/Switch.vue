@@ -49,7 +49,7 @@
         />
       </svg>
     </div>
-    <div class="label">{{ label.toUpperCase() }}</div>
+    <div class="label" :style="labelStyle">{{ label.toUpperCase() }}</div>
   </div>
 </template>
 
@@ -92,14 +92,22 @@ export default {
         marginTop: `${26 * (this.value / (this.positions - 1))}px`,
       };
     },
+    // conditional style if labels or dots are present
+    labelStyle() {
+      return this.labels.length || this.dots
+        ? {
+            marginLeft: "-10px",
+          }
+        : {};
+    },
   },
 };
 </script>
 
 <style scoped>
 .switchOutline {
-  display: flex;
-  flex-direction: column;
+  display: block;
+  margin: auto;
   width: 14px;
   height: 40px;
   border-radius: 10px;
@@ -134,11 +142,8 @@ export default {
   margin-top: 3px;
   font-size: 8px;
   width: 34px;
-  margin-left: -10px;
   text-align: center;
   line-height: 95%;
-  /* fixme */
-  /* background-color: rgba(0, 0, 255, 0.387); */
 }
 .labels {
   font-size: 7px;
