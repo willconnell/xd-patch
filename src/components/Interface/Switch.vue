@@ -4,8 +4,13 @@
       <div class="switchOutline">
         <div class="selector" :style="selectorStyle"></div>
       </div>
+      <div v-if="labels.length" class="labels">
+        <div v-for="label in labels" :key="label">
+          {{ label.toUpperCase() }}<br />
+        </div>
+      </div>
       <svg
-        v-if="sideDots"
+        v-else-if="sideDots"
         :width="2 * sdRad + 2"
         :height="11 * sdRad + 2 - (3 * sdRad) / 5"
         class="sideDots"
@@ -72,7 +77,7 @@ export default {
     },
     label: {
       type: String,
-      default: "key track",
+      default: "",
     },
   },
   data() {
@@ -105,10 +110,12 @@ export default {
 }
 .selector {
   height: 12px;
+  width: 12px;
   border-radius: 100%;
   border-color: black;
   border-width: 1px;
   border-style: solid;
+  transition: margin-top 0.7s;
 }
 .switch {
   display: flex;
@@ -120,14 +127,24 @@ export default {
 }
 .switchWrapper {
   width: 50px;
-  background-color: rgba(255, 0, 0, 0.457);
+  /* fixme */
+  /* background-color: rgba(255, 0, 0, 0.29); */
 }
 .label {
-  font-size: 9px;
-  background-color: blue;
+  margin-top: 3px;
+  font-size: 8px;
   width: 34px;
   margin-left: -10px;
   text-align: center;
   line-height: 95%;
+  /* fixme */
+  /* background-color: rgba(0, 0, 255, 0.387); */
+}
+.labels {
+  font-size: 7px;
+  text-align: left;
+  line-height: 180%;
+  margin-top: 4px;
+  margin-left: 2px;
 }
 </style>
