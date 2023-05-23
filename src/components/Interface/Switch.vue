@@ -71,13 +71,19 @@ export default {
       type: Boolean,
       default: false,
     },
+    // labels for the different switch positions
     labels: {
       type: Array,
       default: [],
     },
+    // label beneath the switch
     label: {
       type: String,
       default: "",
+    },
+    dotLabels: {
+      type: Array,
+      default: [],
     },
   },
   data() {
@@ -150,9 +156,11 @@ export default {
   line-height: 95%;
 }
 .labels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   font-size: 7px;
   text-align: left;
-  line-height: 180%;
   margin-top: 4px;
   margin-left: 2px;
 }

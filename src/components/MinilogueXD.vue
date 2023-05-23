@@ -72,10 +72,10 @@
     </div>
     <div class="modulation section">
       <div class="row">
-        <Knob label="attack" :value="prog?.ampEgAttack" />
-        <Knob label="decay" :value="prog?.ampEgDecay" />
-        <Knob label="sustain" :value="prog?.ampEgSustain" />
-        <Knob label="release" :value="prog?.ampEgRelease" />
+        <Knob label="attack" :value="prog?.ampEGAttack" />
+        <Knob label="decay" :value="prog?.ampEGDecay" />
+        <Knob label="sustain" :value="prog?.ampEGSustain" />
+        <Knob label="release" :value="prog?.ampEGRelease" />
       </div>
       <div class="row">
         <Knob label="attack" :value="prog?.egAttack" />
@@ -176,6 +176,18 @@
       </ul>
     </div>
   </div> -->
+
+  <!-- 
+    next steps:
+      adding labels to poly/chord/latch switch
+      labeling different sections
+      dark mode styling
+      matching height of "drive" and "key track" switches
+  
+  
+  
+  
+  -->
 </template>
 
 <script>
@@ -218,7 +230,7 @@ export default {
               if (e.data[0] === 0xf0) {
                 console.log("REAL MIDI DATA");
                 console.log("sysex response", e);
-                vm.program = parseSysex(e.data);
+                vm.prog = parseSysex(e.data);
               } else if (e.data[0] != 0xf8) {
                 console.log("non clock non sysex", e);
               }
