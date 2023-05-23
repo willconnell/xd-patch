@@ -95,10 +95,11 @@ export default {
     // conditional style if labels or dots are present
     labelStyle() {
       return this.labels.length || this.dots
-        ? {
-            marginLeft: "-10px",
-          }
-        : {};
+        ? {}
+        : {
+            margin: "auto",
+            marginTop: "3px",
+          };
     },
   },
 };
@@ -129,11 +130,14 @@ export default {
   display: flex;
   flex-direction: row;
   width: 33px;
+  margin: auto;
 }
 .dots {
   margin-left: 6px;
 }
 .switchWrapper {
+  display: block;
+  margin: auto;
   width: 50px;
   /* fixme */
   /* background-color: rgba(255, 0, 0, 0.29); */

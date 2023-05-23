@@ -15,8 +15,10 @@
         <Switch label="octave" :dots="true" />
         <Knob label="pitch" />
         <Knob label="shape" />
-        <Switch label="sync" :positions="2" />
-        <Switch label="ring" :positions="2" />
+        <div style="width: 70px; display: flex; flex-direction: row">
+          <Switch label="sync" :positions="2" />
+          <Switch label="ring" :positions="2" />
+        </div>
       </div>
       <div class="row">
         <Switch label="wave" :labels="['saw', 'tri', 'sqr']" />
@@ -37,8 +39,8 @@
       <Knob label="multi" />
     </div>
     <div class="filter section">
-      <Knob label="vco 1" />
-      <Knob label="vco 1" />
+      <Knob label="cutoff" />
+      <Knob label="resonance" />
       <div class="row">
         <Switch label="drive" />
         <Switch label="key track" :positions="2" />
@@ -1394,15 +1396,20 @@ export default {
 }
 .section {
   border-right: 1px solid gray;
+  border-left: 1px solid gray;
   padding: 1px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.18);
 }
 .row {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 .multiEngine {
+  margin: auto;
   border: solid 1px black;
   width: 200px;
   height: 30px;

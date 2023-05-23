@@ -56,11 +56,13 @@ export default {
 
 <style scoped>
 .knobLabel {
-  font-size: 11px;
-  width: 70px;
+  font-size: 8px;
+  max-width: 70px;
   text-align: center;
+  margin: auto;
 }
 .knobWrapper {
-  margin: 3px;
+  margin-top: 7px;
+  min-width: 60px;
 }
 </style>
