@@ -1,22 +1,24 @@
 <template>
-  <svg class="knob" :height="size" :width="size" :style="knobStyle">
-    <circle
-      :cx="size / 2"
-      :cy="size / 2"
-      :r="size / 2 - 2"
-      stroke="black"
-      stroke-width="1"
-      fill="none"
-    />
-    <line
-      :x1="size / 2"
-      :y1="2"
-      :x2="size / 2"
-      :y2="size / 2"
-      style="stroke: black; stroke-width: 1"
-    />
-  </svg>
-  <div class="knobLabel">{{ label.toUpperCase() }}</div>
+  <div class="knobWrapper">
+    <svg class="knob" :height="size" :width="size" :style="knobStyle">
+      <circle
+        :cx="size / 2"
+        :cy="size / 2"
+        :r="size / 2 - 2"
+        stroke="black"
+        stroke-width="1"
+        fill="none"
+      />
+      <line
+        :x1="size / 2"
+        :y1="2"
+        :x2="size / 2"
+        :y2="size / 2"
+        style="stroke: black; stroke-width: 1"
+      />
+    </svg>
+    <div class="knobLabel">{{ label.toUpperCase() }}</div>
+  </div>
 </template>
 
 <script>
@@ -30,7 +32,7 @@ export default {
     },
     label: {
       type: String,
-      default: "portamento", // fixme: change to blank later
+      default: "",
     },
     // size = height = width of svg
     size: {
@@ -55,5 +57,10 @@ export default {
 <style scoped>
 .knobLabel {
   font-size: 11px;
+  width: 70px;
+  text-align: center;
+}
+.knobWrapper {
+  margin: 3px;
 }
 </style>

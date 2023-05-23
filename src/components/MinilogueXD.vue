@@ -1,11 +1,100 @@
 <template>
+  <div class="mainInterface">
+    <div class="master section">
+      <Knob label="master" />
+      <Knob label="tempo" />
+    </div>
+    <div class="voice section">
+      <Knob label="portamento" />
+      <Knob label="voice mode depth" />
+      <Switch :dots="true" />
+    </div>
+    <div class="oscillators section">
+      <div class="row">
+        <Switch label="wave" :labels="['saw', 'tri', 'sqr']" />
+        <Switch label="octave" :dots="true" />
+        <Knob label="pitch" />
+        <Knob label="shape" />
+        <Switch label="sync" :positions="2" />
+        <Switch label="ring" :positions="2" />
+      </div>
+      <div class="row">
+        <Switch label="wave" :labels="['saw', 'tri', 'sqr']" />
+        <Switch label="octave" :dots="true" />
+        <Knob label="pitch" />
+        <Knob label="shape" />
+        <Knob label="cross mod depth" />
+      </div>
+      <div class="row">
+        <Switch label="wave" :labels="['usr', 'vpm', 'noi']" />
+        <div class="multiEngine"></div>
+        <Knob label="shape" />
+      </div>
+    </div>
+    <div class="mixer section">
+      <Knob label="vco 1" />
+      <Knob label="vco 2" />
+      <Knob label="multi" />
+    </div>
+    <div class="filter section">
+      <Knob label="vco 1" />
+      <Knob label="vco 1" />
+      <div class="row">
+        <Switch label="drive" />
+        <Switch label="key track" :positions="2" />
+      </div>
+    </div>
+    <div class="modulation section">
+      <div class="row">
+        <Knob label="attack" />
+        <Knob label="decay" />
+        <Knob label="sustain" />
+        <Knob label="release" />
+      </div>
+      <div class="row">
+        <Knob label="attack" />
+        <Knob label="decay" />
+        <Knob label="eg int" />
+        <Switch label="target" :labels="['pitch', 'pitch 2', 'cutoff']" />
+      </div>
+      <div class="row">
+        <Switch label="wave" :labels="['usr', 'vpm', 'noi']" />
+        <Switch label="mode" :labels="['bpm', 'normal', '1 shot']" />
+        <Knob label="rate" />
+        <Knob label="int" />
+        <Switch label="target" :labels="['pitch', 'shape', 'cutoff']" />
+      </div>
+    </div>
+    <div class="effects section">
+      <div class="row">
+        <Switch label="mod" :labels="['on', 'off']" :positions="2" />
+        <Knob label="time" />
+        <Knob label="depth" />
+      </div>
+      <div class="row">
+        <Switch label="rev" :labels="['on', 'off']" :positions="2" />
+        <Knob label="time" />
+        <Knob label="depth" />
+      </div>
+      <div class="row">
+        <Switch label="del" :labels="['on', 'off']" :positions="2" />
+        <Knob label="time" />
+        <Knob label="depth" />
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <br />
+  <br />
+
   <button
     @click="requestDataDump"
     style="cursor: pointer; display: block; margin: auto"
   >
     Trigger Data Dump
   </button>
-  <br />
+  <!-- <br />
   <Knob :value="512" />
   <Switch
     :value="parseInt(switchValue)"
@@ -28,7 +117,7 @@
         <li style="">{{ device.name }}</li>
       </ul>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -1296,3 +1385,26 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.mainInterface {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.section {
+  border-right: 1px solid gray;
+  padding: 1px;
+  display: flex;
+  flex-direction: column;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.multiEngine {
+  border: solid 1px black;
+  width: 200px;
+  height: 30px;
+}
+</style>

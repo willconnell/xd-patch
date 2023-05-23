@@ -10,10 +10,10 @@
         </div>
       </div>
       <svg
-        v-else-if="sideDots"
+        v-else-if="dots"
         :width="2 * sdRad + 2"
         :height="11 * sdRad + 2 - (3 * sdRad) / 5"
-        class="sideDots"
+        class="dots"
       >
         <circle
           :cx="sdRad + 1"
@@ -66,8 +66,8 @@ export default {
       type: Number,
       default: 3,
     },
-    // fixme: if sidedots enabled, selector should always be in the middle
-    sideDots: {
+    // fixme: if side dots enabled, selector should always be in the middle
+    dots: {
       type: Boolean,
       default: false,
     },
@@ -122,7 +122,7 @@ export default {
   flex-direction: row;
   width: 33px;
 }
-.sideDots {
+.dots {
   margin-left: 6px;
 }
 .switchWrapper {
