@@ -1,9 +1,5 @@
 <template>
-  <div class="themeBox">
-    <input type="checkbox" v-model="isDark" />
-    isDark: {{ isDark }}
-    <br />
-  </div>
+  <ThemeSwitch />
   <MinilogueXD />
   <br />
   <br />
@@ -19,30 +15,13 @@
 
 <script>
 import MinilogueXD from "./components/MinilogueXD.vue";
+import ThemeSwitch from "./components/Interface/ThemeSwitch.vue";
 
 export default {
   name: "App",
   components: {
     MinilogueXD,
-  },
-  data() {
-    return {
-      isDark: false,
-      theme: "dark-theme",
-    };
-  },
-  watch: {
-    isDark() {
-      this.setTheme();
-    },
-  },
-  mounted() {
-    this.setTheme();
-  },
-  methods: {
-    setTheme() {
-      document.documentElement.className = this.isDark ? "dark-theme" : "";
-    },
+    ThemeSwitch,
   },
 };
 </script>
@@ -68,7 +47,8 @@ html body {
   --background-color-secondary: #fafafa;
   --accent-color: #cacaca;
   --text-primary-color: #222;
-  --element-size: 4rem;
+  --text-secondary-color: #8e8e8e;
+  --element-size: 2.8rem;
 }
 
 /* Define styles for the root window with dark - mode preference */
