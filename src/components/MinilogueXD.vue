@@ -6,82 +6,138 @@
     </div>
     <div class="voice section">
       <Knob label="portamento" />
-      <Knob label="voice mode depth" />
-      <Switch :dots="true" />
+      <Knob label="voice mode depth" :value="prog?.voiceModeDepth" />
+      <Switch :dots="true" :value="prog?.voiceModeType - 1" :positions="4" />
     </div>
     <div class="oscillators section">
       <div class="row">
-        <Switch label="wave" :labels="['saw', 'tri', 'sqr']" />
-        <Switch label="octave" :dots="true" />
-        <Knob label="pitch" />
-        <Knob label="shape" />
+        <Switch
+          label="wave"
+          :labels="['saw', 'tri', 'sqr']"
+          :value="prog?.vco1Wave"
+        />
+        <Switch
+          label="octave"
+          :dots="true"
+          :positions="4"
+          :value="prog?.vco1Octave"
+        />
+        <Knob label="pitch" :value="prog?.vco1Pitch" />
+        <Knob label="shape" :value="prog?.vco1Shape" />
         <div style="width: 70px; display: flex; flex-direction: row">
-          <Switch label="sync" :positions="2" />
-          <Switch label="ring" :positions="2" />
+          <Switch label="sync" :positions="2" :value="prog?.sync" />
+          <Switch label="ring" :positions="2" :value="prog?.ring" />
         </div>
       </div>
       <div class="row">
-        <Switch label="wave" :labels="['saw', 'tri', 'sqr']" />
-        <Switch label="octave" :dots="true" />
-        <Knob label="pitch" />
-        <Knob label="shape" />
-        <Knob label="cross mod depth" />
+        <Switch
+          label="wave"
+          :labels="['saw', 'tri', 'sqr']"
+          :value="prog?.vco2Wave"
+        />
+        <Switch
+          label="octave"
+          :dots="true"
+          :positions="4"
+          :value="prog?.vco2Octave"
+        />
+        <Knob label="pitch" :value="prog?.vco2Pitch" />
+        <Knob label="shape" :value="prog?.vco2Shape" />
+        <Knob label="cross mod depth" :value="prog?.crossModDepth" />
       </div>
       <div class="row">
-        <Switch label="wave" :labels="['usr', 'vpm', 'noi']" />
+        <Switch
+          label="wave"
+          :labels="['usr', 'vpm', 'noi']"
+          :value="prog?.multiType"
+        />
+        <!-- fixme: configure multiEngine later -->
         <div class="multiEngine"></div>
         <Knob label="shape" />
       </div>
     </div>
     <div class="mixer section">
-      <Knob label="vco 1" />
-      <Knob label="vco 2" />
-      <Knob label="multi" />
+      <Knob label="vco 1" :value="prog?.vco1Level" />
+      <Knob label="vco 2" :value="prog?.vco2Level" />
+      <Knob label="multi" :value="prog?.multiLevel" />
     </div>
     <div class="filter section">
-      <Knob label="cutoff" />
-      <Knob label="resonance" />
+      <Knob label="cutoff" :value="prog?.cutoff" />
+      <Knob label="resonance" :value="prog?.resonance" />
       <div class="row">
-        <Switch label="drive" />
-        <Switch label="key track" :positions="2" />
+        <!-- fixme: fix layout here -->
+        <Switch label="drive" :value="prog?.cutoffDrive" />
+        <Switch label="key track" :value="prog?.cutoffKeyTrack" />
       </div>
     </div>
     <div class="modulation section">
       <div class="row">
-        <Knob label="attack" />
-        <Knob label="decay" />
-        <Knob label="sustain" />
-        <Knob label="release" />
+        <Knob label="attack" :value="prog?.ampEgAttack" />
+        <Knob label="decay" :value="prog?.ampEgDecay" />
+        <Knob label="sustain" :value="prog?.ampEgSustain" />
+        <Knob label="release" :value="prog?.ampEgRelease" />
       </div>
       <div class="row">
-        <Knob label="attack" />
-        <Knob label="decay" />
-        <Knob label="eg int" />
-        <Switch label="target" :labels="['pitch', 'pitch 2', 'cutoff']" />
+        <Knob label="attack" :value="prog?.egAttack" />
+        <Knob label="decay" :value="prog?.egDecay" />
+        <Knob label="eg int" :value="prog?.egInt" />
+        <Switch
+          label="target"
+          :labels="['pitch', 'pitch 2', 'cutoff']"
+          :value="prog?.egTarget"
+        />
       </div>
       <div class="row">
-        <Switch label="wave" :labels="['usr', 'vpm', 'noi']" />
-        <Switch label="mode" :labels="['bpm', 'normal', '1 shot']" />
-        <Knob label="rate" />
-        <Knob label="int" />
-        <Switch label="target" :labels="['pitch', 'shape', 'cutoff']" />
+        <Switch
+          label="wave"
+          :labels="['usr', 'vpm', 'noi']"
+          :value="prog?.lfoWave"
+        />
+        <Switch
+          label="mode"
+          :labels="['bpm', 'normal', '1 shot']"
+          :value="prog?.lfoMode"
+        />
+        <Knob label="rate" :value="prog?.lfoRate" />
+        <Knob label="int" :value="prog?.lfoInt" />
+        <Switch
+          label="target"
+          :labels="['pitch', 'shape', 'cutoff']"
+          :value="prog?.lfoTarget"
+        />
       </div>
     </div>
     <div class="effects section">
       <div class="row">
-        <Switch label="mod" :labels="['on', 'off']" :positions="2" />
-        <Knob label="time" />
-        <Knob label="depth" />
+        <!-- fixme: configure sub types for FX later -->
+        <Switch
+          label="mod"
+          :labels="['on', 'off']"
+          :positions="2"
+          :value="prog?.modFxIO"
+        />
+        <Knob label="time" :value="prog?.modFxTime" />
+        <Knob label="depth" :value="prog?.modFxDepth" />
       </div>
       <div class="row">
-        <Switch label="rev" :labels="['on', 'off']" :positions="2" />
-        <Knob label="time" />
-        <Knob label="depth" />
+        <Switch
+          label="rev"
+          :labels="['on', 'off']"
+          :positions="2"
+          :value="prog?.reverbIO"
+        />
+        <Knob label="time" :value="prog?.reverbTime" />
+        <Knob label="depth" :value="prog?.reverbDepth" />
       </div>
       <div class="row">
-        <Switch label="del" :labels="['on', 'off']" :positions="2" />
-        <Knob label="time" />
-        <Knob label="depth" />
+        <Switch
+          label="del"
+          :labels="['on', 'off']"
+          :positions="2"
+          :value="prog?.delayIO"
+        />
+        <Knob label="time" :value="prog?.delayTime" />
+        <Knob label="depth" :value="prog?.delayDepth" />
       </div>
     </div>
   </div>
@@ -131,13 +187,14 @@ export default {
   components: { Knob, Switch },
   data() {
     return {
+      sample: 0,
       switchValue: 0,
       accessGranted: false,
       midiAccess: null,
       channel: 0, // todo: make user configurable
       inputs: [],
       outputs: [],
-      program: null,
+      prog: null,
     };
   },
   mounted() {
@@ -1381,7 +1438,7 @@ export default {
         };
         let testRes = new Uint8Array(Object.values(x));
         console.log("test res", testRes);
-        this.program = parseSysex(testRes);
+        this.prog = parseSysex(testRes);
       }
     },
   },

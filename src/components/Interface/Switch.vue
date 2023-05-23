@@ -89,7 +89,7 @@ export default {
   computed: {
     selectorStyle() {
       return {
-        marginTop: `${26 * (this.value / (this.positions - 1))}px`,
+        marginTop: `${26 - 26 * (this.value / (this.positions - 1))}px`,
       };
     },
     // conditional style if labels or dots are present
