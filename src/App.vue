@@ -1,16 +1,6 @@
 <template>
   <ThemeSwitch />
   <MinilogueXD />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <img
-    alt="Korg Minilogue XD"
-    style="width: 500px"
-    src="./assets/miniloguexd.png"
-  />
 </template>
 
 <script>
@@ -32,7 +22,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  /* color: #2c3e50; */
   margin-top: 60px;
 }
 
@@ -41,7 +30,7 @@ html body {
   color: var(--text-primary-color);
 }
 
-/* Define styles for the default root window element */
+/* light mode style variables */
 :root {
   --background-color-primary: #ebebeb;
   --background-color-secondary: #fafafa;
@@ -51,7 +40,7 @@ html body {
   --element-size: 2.8rem;
 }
 
-/* Define styles for the root window with dark - mode preference */
+/* dark mode style variables */
 :root.dark-theme {
   --background-color-primary: #1e1e1e;
   --background-color-secondary: #2d2d30;

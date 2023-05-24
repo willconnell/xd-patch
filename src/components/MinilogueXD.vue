@@ -223,6 +223,15 @@
       midi channel selector
       figure out how input/output midi UI will look
       fix weird gap in some switches in bottom position
+
+
+
+      missing knob functionality:
+        - whole mult section
+        - master
+        - tempo
+        - octave
+        - portamento knob
   -->
 </template>
 
