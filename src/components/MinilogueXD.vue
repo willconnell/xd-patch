@@ -13,11 +13,12 @@
         :dotLabels="['poly', 'unison', 'chord', 'arp']"
         :value="prog?.voiceModeType - 1"
         :positions="4"
+        style="margin-top: 0px; margin-bottom: 14px"
       />
     </div>
     <div class="divider"></div>
     <div class="oscillators section">
-      <div class="secTitle">SECTION</div>
+      <div class="secTitle">VCO 1</div>
       <div class="row sr">
         <Switch
           label="wave"
@@ -37,7 +38,7 @@
           <Switch label="ring" :positions="2" :value="prog?.ring" />
         </div>
       </div>
-      <div class="secTitle">SECTION</div>
+      <div class="secTitle">VCO 2</div>
 
       <div class="row sr">
         <Switch
@@ -55,9 +56,8 @@
         <Knob label="shape" :value="prog?.vco2Shape" />
         <Knob label="cross mod depth" :value="prog?.crossModDepth" />
       </div>
-      <div class="secTitle">SECTION</div>
-
-      <div class="row sr">
+      <div class="secTitle">MULTI ENGINE</div>
+      <div class="row">
         <Switch
           label="wave"
           :labels="['usr', 'vpm', 'noi']"
@@ -70,14 +70,14 @@
     </div>
     <div class="divider"></div>
     <div class="mixer section">
-      <div class="secTitle">SECTION</div>
+      <div class="secTitle">MIXER</div>
       <Knob label="vco 1" :value="prog?.vco1Level" />
       <Knob label="vco 2" :value="prog?.vco2Level" />
       <Knob label="multi" :value="prog?.multiLevel" />
     </div>
     <div class="divider"></div>
     <div class="filter section">
-      <div class="secTitle">SECTION</div>
+      <div class="secTitle">FILTER</div>
       <Knob label="cutoff" :value="prog?.cutoff" />
       <Knob label="resonance" :value="prog?.resonance" />
       <div class="row">
@@ -92,16 +92,14 @@
     </div>
     <div class="divider"></div>
     <div class="modulation section">
-      <div class="secTitle">SECTION</div>
-
+      <div class="secTitle">AMP EG</div>
       <div class="row sr">
         <Knob label="attack" :value="prog?.ampEGAttack" />
         <Knob label="decay" :value="prog?.ampEGDecay" />
         <Knob label="sustain" :value="prog?.ampEGSustain" />
         <Knob label="release" :value="prog?.ampEGRelease" />
       </div>
-      <div class="secTitle">SECTION</div>
-
+      <div class="secTitle">EG</div>
       <div class="row sr">
         <Knob label="attack" :value="prog?.egAttack" />
         <Knob label="decay" :value="prog?.egDecay" />
@@ -110,11 +108,11 @@
           label="target"
           :labels="['pitch', 'pitch 2', 'cutoff']"
           :value="prog?.egTarget"
+          style="margin-left: -2px; margin-right: 12px; width: 50px"
         />
       </div>
-      <div class="secTitle">SECTION</div>
-
-      <div class="row sr">
+      <div class="secTitle">LFO</div>
+      <div class="row">
         <Switch
           label="wave"
           :labels="['usr', 'vpm', 'noi']"
@@ -136,8 +134,7 @@
     </div>
     <div class="divider"></div>
     <div class="effects section">
-      <div class="secTitle">SECTION</div>
-
+      <div class="secTitle">MOD</div>
       <div class="row">
         <!-- fixme: configure sub types for FX later -->
         <Switch
@@ -149,7 +146,7 @@
         <Knob label="time" :value="prog?.modFxTime" />
         <Knob label="depth" :value="prog?.modFxDepth" />
       </div>
-      <div class="secTitle">SECTION</div>
+      <div class="secTitle">REVERB</div>
 
       <div class="row">
         <Switch
@@ -161,7 +158,7 @@
         <Knob label="time" :value="prog?.reverbTime" />
         <Knob label="depth" :value="prog?.reverbDepth" />
       </div>
-      <div class="secTitle">SECTION</div>
+      <div class="secTitle">DELAY</div>
 
       <div class="row">
         <Switch
@@ -175,11 +172,7 @@
       </div>
     </div>
   </div>
-
   <br />
-  <br />
-  <br />
-
   <button
     @click="requestDataDump"
     style="
@@ -216,17 +209,20 @@
     next steps:
       -------adding labels to poly/chord/latch switch
       -------implement dark mode toggle
-      labeling different sections
+      -------labeling different sections
       -------dark mode styling
       -------create nice dark mode switch
       -------matching height of "drive" and "key track" switches
-      fix odd spreading of voice section; why is voice type switch so tall?
-      fix weird gap in some switches in bottom position
+      -------fix odd spreading of voice section; why is voice type switch so tall?
       -------add fill to side dots
+      calibrate clock position of knobs to actual on minilogue
+      validate data with actual minilogue
+      master & tempo knob positions?
       style side dot fill to look like a glowing light
       investigate why poly/unison switch defaults to top position
       midi channel selector
       figure out how input/output midi UI will look
+      fix weird gap in some switches in bottom position
   -->
 </template>
 
