@@ -57,9 +57,6 @@ function createProgramObj(converted) {
   program.ring = dataview.getInt8(35);
   program.crossModDepth = dataview.getInt16(36, true);
   program.multiType = dataview.getInt8(38);
-  program.selectNoise = dataview.getInt8(39);
-  program.selectVPM = dataview.getInt8(40);
-  program.selectUser = dataview.getInt8(41);
   program.shapeNoise = dataview.getInt16(42, true);
   program.shapeVPM = dataview.getInt16(44, true);
   program.shapeUser = dataview.getInt16(46, true);
@@ -140,6 +137,63 @@ function createProgramObj(converted) {
   program.userParam4 = dataview.getInt8(145);
   program.userParam5 = dataview.getInt8(146);
   program.userParam6 = dataview.getInt8(147);
+
+  // multi engine translation
+  const noise = { 0: "HIGH", 1: "LOW", 2: "PEAK", 3: "DECIM" };
+  const vpm = {
+    0: "SINE 1",
+    1: "SINE 2",
+    2: "SINE 3",
+    3: "SINE 4",
+    4: "SAW 1",
+    5: "SAW 2",
+    6: "SQUARE 1",
+    7: "SQUARE 2",
+    8: "FAT 1",
+    9: "FAT 2",
+    10: "AIR 1",
+    11: "AIR 2",
+    12: "DECAY 1",
+    13: "DECAY 2",
+    14: "CREEP",
+    15: "THROAT",
+  };
+  const user = {
+    0: "USER1",
+    1: "USER2",
+    2: "USER3",
+    3: "USER4",
+    4: "USER5",
+    5: "USER6",
+    6: "USER7",
+    7: "USER8",
+    8: "USER9",
+    9: "USER10",
+    10: "USER11",
+    11: "USER12",
+    12: "USER13",
+    13: "USER14",
+    14: "USER15",
+    15: "USER16",
+  };
+  program.selectNoise = noise[dataview.getInt8(39)];
+  program.selectVPM = vpm[dataview.getInt8(40)];
+  program.selectUser = user[dataview.getInt8(41)];
+  // create universal multi variables based on current multi selected
+  switch (program.multiType) {
+    case 0:
+      program.multiString = program.selectNoise;
+      program.multiShape = program.shapeNoise;
+      break;
+    case 1:
+      program.multiString = program.selectVPM;
+      program.multiShape = program.shapeVPM;
+      break;
+    case 2:
+      program.multiString = program.selectUser;
+      program.multiShape = program.shapeUser;
+      break;
+  }
 
   return program;
 }

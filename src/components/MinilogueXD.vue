@@ -63,9 +63,10 @@
           :labels="['usr', 'vpm', 'noi']"
           :value="prog?.multiType"
         />
-        <!-- fixme: configure multiEngine later -->
-        <div class="multiEngine"></div>
-        <Knob label="shape" />
+        <div class="multiEngine">
+          {{ this.prog?.multiString }}
+        </div>
+        <Knob label="shape" :value="prog?.multiShape" />
       </div>
     </div>
     <div class="divider"></div>
@@ -1524,10 +1525,14 @@ export default {
   justify-content: space-between;
 }
 .multiEngine {
+  font-family: monospace;
+  font-size: 18px;
   margin: auto;
   border: solid 1px var(--text-primary-color);
   width: 200px;
-  height: 30px;
+  padding-top: 4px;
+  min-height: 25px;
+  letter-spacing: 2px;
 }
 .secTitle {
   font-size: 12px;

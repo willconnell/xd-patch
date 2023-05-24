@@ -46,8 +46,20 @@ export default {
         transform: `rotate(${this.degRotation}deg)`,
       };
     },
+    // deg rotation vs. value of minilogueXD knobs isn't perfectly linear;
+    // I took a fourth order polynomial fit of the following rough data points
+    // to get a reasonable match to what the user will see on their physical
+    // minilogue
+    //     145 deg @ 1023; 90 deg @ ~916; 0 deg @ 512;
+    //     -90 deg @ ~118; -145 deg @ 0
     degRotation() {
-      return (this.value / 1023) * 290 - 145;
+      return (
+        1.355 * 10 ** -10 * this.value ** 4 +
+        2.896 * 10 ** -7 * this.value ** 3 -
+        7 * 10 ** -4 * this.value ** 2 +
+        0.5435 * this.value -
+        145
+      );
     },
   },
 };
