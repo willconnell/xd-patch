@@ -239,7 +239,12 @@
 
 <script>
 import parseSysex from "../utilities/sysex.js";
-import midiSignals from "../utilities/midi.js";
+import {
+  signals,
+  twoWaySwitches,
+  threeWaySwitches,
+  fourWaySwitches,
+} from "../utilities/midi.js";
 import Knob from "./Interface/Knob";
 import Switch from "./Interface/Switch";
 import { mapMutations } from "vuex";
@@ -287,7 +292,7 @@ export default {
                 vm.requestDataDump();
               } else if (e.data[0] === parseInt(`0xb${vm.channel}`, 16)) {
                 console.log("setting change", e.data);
-                vm.updateKnob(e.data);
+                vm.updateInterface(e.data);
               } else if (e.data[0] != 0xf8) {
                 console.log("non clock non sysex", e.data);
               }
@@ -1524,12 +1529,23 @@ export default {
       const vm = this;
       this.ticker = setTimeout(() => vm.updateTransition(false), 1100);
     },
-    updateKnob(midi) {
-      console.log("update knob");
-      const signal_name = midiSignals[midi[1]];
-      if (signal_name) {
-        console.log(signal_name);
-        this.prog[signal_name] = (midi[2] / 127) * 1023;
+    updateInterface(data) {
+      const [signal, signal_name, value] = [data[1], signals[data[1]], data[2]];
+
+      // translate raw midi value based on knob/switch type
+      if (twoWaySwitches.has(signal)) {
+        const translation = { 0: 0, 127: 1 };
+        this.prog[signal_name] = translation[value];
+      } else if (threeWaySwitches.has(signal)) {
+        const translation = { 0: 0, 64: 1, 127: 2 };
+        this.prog[signal_name] = translation[value];
+      } else if (fourWaySwitches.has(signal)) {
+        const translation = { 0: 0, 42: 1, 84: 2, 127: 3 };
+        this.prog[signal_name] = translation[value];
+      } else if (signal_name === "portamento") {
+        this.prog[signal_name] = value;
+      } else {
+        this.prog[signal_name] = (value / 127) * 1023;
       }
     },
   },
