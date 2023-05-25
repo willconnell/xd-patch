@@ -1,5 +1,11 @@
 <template>
   <ThemeSwitch />
+  <div style="margin-top: -50px; margin-bottom: 20px; margin-left: -55px">
+    <span style="font-size: 14px; margin-bottom: 37px"> (minilogue) </span>
+    <span style="font-size: 2em; font-weight: bold; margin-left: 10px"
+      >XD PATCH</span
+    >
+  </div>
   <MinilogueXD />
 </template>
 

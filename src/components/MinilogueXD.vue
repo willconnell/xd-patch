@@ -1,12 +1,12 @@
 <template>
   <div class="mainInterface">
-    <div class="master section">
+    <!-- <div class="master section">
       <Knob label="master" />
       <Knob label="tempo" />
-    </div>
-    <div class="divider"></div>
+    </div> 
+    <div class="divider"></div> -->
     <div class="voice section">
-      <Knob label="portamento" />
+      <Knob label="portamento" :value="(prog?.portamento / 127) * 1023" />
       <Knob label="voice mode depth" :value="prog?.voiceModeDepth" />
       <Switch
         :dots="true"
@@ -182,12 +182,13 @@
       margin: auto;
       background-color: var(--background-color-secondary);
       color: var(--text-primary-color);
-      border: none;
+      padding: 15px;
+      border-radius: 5px;
     "
   >
-    Trigger Data Dump
+    GET KNOB POSITIONS
   </button>
-  <!--
+
   <div
     style="display: flex; direction: column; position: absolute; bottom: 30px"
   >
@@ -204,7 +205,6 @@
       </ul>
     </div>
   </div>
-  -->
 
   <!-- 
     next steps:
@@ -216,8 +216,13 @@
       -------matching height of "drive" and "key track" switches
       -------fix odd spreading of voice section; why is voice type switch so tall?
       -------add fill to side dots
-      calibrate clock position of knobs to actual on minilogue
+      -------calibrate clock position of knobs to actual on minilogue
+      -------add support to the multi engine
+      translate patch name without the null characters
       validate data with actual minilogue
+      changing preset auto updates interface
+      live knob turning feature for all knobs
+      warning for users who don't have midi access enabled
       master & tempo knob positions?
       style side dot fill to look like a glowing light
       investigate why poly/unison switch defaults to top position
@@ -228,11 +233,11 @@
 
 
       missing knob functionality:
-        - whole mult section
+        --------whole mult section
         - master
         - tempo
         - octave
-        - portamento knob
+        -------portamento knob
   -->
 </template>
 
@@ -252,7 +257,7 @@ export default {
       channel: 0, // todo: make user configurable
       inputs: [],
       outputs: [],
-      prog: null,
+      prog: {},
     };
   },
   mounted() {
@@ -273,12 +278,18 @@ export default {
           this.inputs.push(input);
           input.open().then(() => {
             input.onmidimessage = function (e) {
-              if (e.data[0] === 0xf0) {
+              if (e.data[0] === parseInt(`0xf${vm.channel}`, 16)) {
                 console.log("REAL MIDI DATA");
                 console.log("sysex response", e);
                 vm.prog = parseSysex(e.data);
+              } else if (e.data[0] === parseInt(`0xc${vm.channel}`, 16)) {
+                console.log("PROGRAM CHANGE");
+                vm.requestDataDump();
+              } else if (e.data[0] === parseInt(`0xb${vm.channel}`, 16)) {
+                console.log("setting change", e.data);
+                vm.updateKnob(e.data);
               } else if (e.data[0] != 0xf8) {
-                console.log("non clock non sysex", e);
+                console.log("non clock non sysex", e.data);
               }
             };
           });
@@ -289,7 +300,13 @@ export default {
         console.warn("MIDI access denied:", error);
       }
     },
+    /* at beginning of this function:
+        create a global vuex variable called like "transition" or something
+        enable it to true at the start of this function
+        turn it to false at the end of this function
+    */
     requestDataDump() {
+      console.log("request data dump");
       if (this.accessGranted && this.midiAccess) {
         this.midiAccess.outputs.forEach((output) => {
           output.open().then(() => {
@@ -1497,6 +1514,13 @@ export default {
         let testRes = new Uint8Array(Object.values(x));
         console.log("test res", testRes);
         this.prog = parseSysex(testRes);
+      }
+    },
+    updateKnob(midi) {
+      console.log("update knob", midi);
+      if (midi[1] === 0x27) {
+        console.log("VCO 1 LEVEL");
+        this.prog.vco1Level = (midi[2] / 127) * 1023;
       }
     },
   },

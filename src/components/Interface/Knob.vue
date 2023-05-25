@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "Knob",
   props: {
@@ -40,11 +42,16 @@ export default {
     },
   },
   computed: {
+    ...mapGetters(["transition"]),
     knobStyle() {
-      return {
-        transition: "transform 1s",
-        transform: `rotate(${this.degRotation}deg)`,
-      };
+      return this.transition
+        ? {
+            transition: "transform 1s",
+            transform: `rotate(${this.degRotation}deg)`,
+          }
+        : {
+            transform: `rotate(${this.degRotation}deg)`,
+          };
     },
     // deg rotation vs. value of minilogueXD knobs isn't perfectly linear;
     // I took a fourth order polynomial fit of the following rough data points
