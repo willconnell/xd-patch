@@ -239,6 +239,7 @@
 
 <script>
 import parseSysex from "../utilities/sysex.js";
+import midiSignals from "../utilities/midi.js";
 import Knob from "./Interface/Knob";
 import Switch from "./Interface/Switch";
 import { mapMutations } from "vuex";
@@ -1524,10 +1525,11 @@ export default {
       this.ticker = setTimeout(() => vm.updateTransition(false), 1100);
     },
     updateKnob(midi) {
-      console.log("update knob", midi);
-      if (midi[1] === 0x27) {
-        console.log("VCO 1 LEVEL");
-        this.prog.vco1Level = (midi[2] / 127) * 1023;
+      console.log("update knob");
+      const signal_name = midiSignals[midi[1]];
+      if (signal_name) {
+        console.log(signal_name);
+        this.prog[signal_name] = (midi[2] / 127) * 1023;
       }
     },
   },
