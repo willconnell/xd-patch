@@ -2,7 +2,7 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
-    transition: true,
+    transition: false,
   },
   mutations: {
     updateTransition(state, payload) {

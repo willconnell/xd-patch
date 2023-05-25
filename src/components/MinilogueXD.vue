@@ -219,25 +219,21 @@
       -------calibrate clock position of knobs to actual on minilogue
       -------add support to the multi engine
       translate patch name without the null characters
-      validate data with actual minilogue
-      changing preset auto updates interface
+      -------validate data with actual minilogue
+      -------changing preset auto updates interface
       live knob turning feature for all knobs
       warning for users who don't have midi access enabled
-      master & tempo knob positions?
-      style side dot fill to look like a glowing light
       investigate why poly/unison switch defaults to top position
       midi channel selector
       figure out how input/output midi UI will look
-      fix weird gap in some switches in bottom position
+      add instructions / settings / coffee button
 
+      take demo footage
+      edit footage into a nice demo video
+      take clips of video and turn it into gifs
 
-
-      missing knob functionality:
-        --------whole mult section
-        - master
-        - tempo
-        - octave
-        -------portamento knob
+      create simple personal website
+      set up hosting for both
   -->
 </template>
 
@@ -245,6 +241,7 @@
 import parseSysex from "../utilities/sysex.js";
 import Knob from "./Interface/Knob";
 import Switch from "./Interface/Switch";
+import { mapMutations } from "vuex";
 
 export default {
   components: { Knob, Switch },
@@ -258,12 +255,14 @@ export default {
       inputs: [],
       outputs: [],
       prog: {},
+      ticker: null,
     };
   },
   mounted() {
     this.requestMidiAccess();
   },
   methods: {
+    ...mapMutations(["updateTransition"]),
     async requestMidiAccess() {
       const vm = this;
       try {
@@ -306,6 +305,11 @@ export default {
         turn it to false at the end of this function
     */
     requestDataDump() {
+      // Use transitions only when we request a data dump. This allows knob updates
+      // to be instant for real time physical changes.
+      this.updateTransition(true);
+      // reset ticker for more fluid behavior on quick preset changes
+      clearTimeout(this.ticker);
       console.log("request data dump");
       if (this.accessGranted && this.midiAccess) {
         this.midiAccess.outputs.forEach((output) => {
@@ -1515,6 +1519,9 @@ export default {
         console.log("test res", testRes);
         this.prog = parseSysex(testRes);
       }
+      // update vuex transition only after css animations have completed
+      const vm = this;
+      this.ticker = setTimeout(() => vm.updateTransition(false), 1100);
     },
     updateKnob(midi) {
       console.log("update knob", midi);
