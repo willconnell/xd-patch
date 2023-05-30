@@ -1,4 +1,5 @@
 <template>
+  <Modal v-if="showModal" />
   <div class="mainInterface">
     <!-- <div class="master section">
       <Knob label="master" />
@@ -175,8 +176,21 @@
   </div>
   <br />
   <button @click="requestDataDump" class="customBtn">GET KNOB POSITIONS</button>
+  <button
+    class="customBtn"
+    style="position: absolute; top: 15px; left: 15px"
+    @click="showModal = true"
+  >
+    Settings
+  </button>
+  <button
+    class="customBtn"
+    style="position: absolute; bottom: 15px; margin: auto"
+  >
+    buy me a coffee
+  </button>
 
-  <div
+  <!-- <div
     style="display: flex; direction: column; position: absolute; bottom: 30px"
   >
     <div style="width: 300px; text-align: left">
@@ -191,7 +205,7 @@
         <li style="">{{ device.name }}</li>
       </ul>
     </div>
-  </div>
+  </div> -->
 
   <!-- 
     next steps:
@@ -235,12 +249,14 @@ import {
 } from "../utilities/midi.js";
 import Knob from "./Interface/Knob";
 import Switch from "./Interface/Switch";
+import Modal from "./Modal";
 import { mapMutations } from "vuex";
 
 export default {
-  components: { Knob, Switch },
+  components: { Knob, Switch, Modal },
   data() {
     return {
+      showModal: true,
       sample: 0,
       switchValue: 0,
       accessGranted: false,
@@ -304,12 +320,11 @@ export default {
       this.updateTransition(true);
       // reset ticker for more fluid behavior on quick preset changes
       clearTimeout(this.ticker);
-      console.log("request data dump");
       if (this.accessGranted && this.midiAccess) {
         this.midiAccess.outputs.forEach((output) => {
           output.open().then(() => {
-            const hexChannel = parseInt(`0x3${this.channel}`, 16);
             // send sysex message to request current program data dump
+            const hexChannel = parseInt(`0x3${this.channel}`, 16);
             let message = [
               0xf0, // Start of Exclusive (Sysex) message
               0x42, // Manufacturer ID (Korg)
@@ -325,9 +340,9 @@ export default {
         });
       }
 
-      // use test data when no midi device connected
+      // use sample data when no midi device connected
       if (this.inputs.length === 0 && this.outputs.length === 0) {
-        console.log("TEST DATA");
+        console.log("SAMPLE DATA");
         let testRes = new Uint8Array(Object.values(sampleData));
         console.log("test res", testRes);
         this.prog = parseSysex(testRes);
