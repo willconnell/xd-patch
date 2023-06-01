@@ -174,7 +174,7 @@
     </div>
   </div>
   <br />
-  <button @click="requestDataDump" class="customBtn">GET KNOB POSITIONS</button>
+  <btn @click="requestDataDump">GET KNOB POSITIONS</btn>
 
   <!-- <div
     style="display: flex; direction: column; position: absolute; bottom: 30px"
@@ -213,7 +213,7 @@
       investigate why poly/unison switch defaults to top position
       midi channel selector
       figure out how input/output midi UI will look
-      add instructions / settings / coffee button
+      add instructions / settings / coffee Btn
 
       take demo footage
       edit footage into a nice demo video
@@ -236,10 +236,11 @@ import {
 import Knob from "./Knob";
 import Switch from "./Switch";
 import Modal from "../Interface/Modal";
+import Btn from "../Interface/Btn";
 import { mapMutations } from "vuex";
 
 export default {
-  components: { Knob, Switch, Modal },
+  components: { Knob, Switch, Modal, Btn },
   data() {
     return {
       showModal: true,

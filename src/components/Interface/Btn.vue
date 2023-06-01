@@ -1,5 +1,7 @@
 <template>
-  <div class="customBtn"></div>
+  <button class="customBtn">
+    <slot></slot>
+  </button>
 </template>
 
 <style scoped>
