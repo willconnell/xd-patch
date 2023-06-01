@@ -169,7 +169,13 @@
     </div>
   </div>
   <br />
-  <btn @click="requestDataDump" :large="true">GET KNOB POSITIONS</btn>
+  <btn @click="requestDataDump" :large="true">{{ mainBtnText }}</btn>
+  <div v-if="!accessGranted" class="warningMessage">
+    *(midi access not <a href="">enabled</a>)
+  </div>
+  <div v-if="noDevicesFound" class="warningMessage">
+    *(no midi devices <a href="">detected</a>)
+  </div>
 
   <!-- <div
     style="display: flex; direction: column; position: absolute; bottom: 30px"
@@ -354,6 +360,16 @@ export default {
     },
     toggleModal() {},
   },
+  computed: {
+    noDevicesFound() {
+      return this.inputs.length === 0 && this.outputs.length === 0;
+    },
+    mainBtnText() {
+      return !this.accessGranted || this.noDevicesFound
+        ? "SEE SAMPLE DATA*"
+        : "GET KNOB POSITIONS";
+    },
+  },
 };
 </script>
 
@@ -394,5 +410,12 @@ export default {
 }
 .sr {
   margin-bottom: 15px;
+}
+
+.warningMessage {
+  display: block;
+  margin: auto;
+  font-size: 12px;
+  margin-top: 8px;
 }
 </style>

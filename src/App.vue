@@ -77,4 +77,12 @@ html body {
   --accent-color: #3f3f3f;
   --text-primary-color: #ddd;
 }
+
+/* make all links primary text color */
+a {
+  color: var(--text-primary-color);
+}
+a:visited {
+  color: var(--text-primary-color);
+}
 </style>
