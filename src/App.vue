@@ -6,7 +6,41 @@
   >
     About
   </Btn>
-  <Modal :show="showModal" :toggle="toggleModal" />
+  <Modal :show="showModal" :toggle="toggleModal">
+    <div>
+      <h3>Instructions</h3>
+      <ol class="left">
+        <li>Allow MIDI access</li>
+        <li>Connect Korg Minilogue XD via USB</li>
+        <li>Press "GET KNOB POSITIONS"!</li>
+      </ol>
+      <p class="left">
+        The interface will now reflect the current true state of your Minilogue
+        XD, and all live knob changes will update in real time!
+      </p>
+      <br />
+      <h3>Support</h3>
+      <p class="left">
+        Synthesizers: Korg Minilogue XD, Korg Minilogue XD Module
+        <br />
+        Browsers: Chrome, Edge, Firefox, Opera. (see
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/API/Web_MIDI_API#browser_compatibility"
+          target="_blank"
+          >here</a
+        >
+        for detailed list)
+      </p>
+      <br />
+      <p style="margin-bottom: -10px">
+        <a href="https://github.com/willconnell" target="_blank">
+          <i class="fa fa-github"></i>
+        </a>
+        - built by
+        <a href="https://willconnell.me" target="_blank">Will Connell</a> - 2023
+      </p>
+    </div>
+  </Modal>
   <div style="margin-top: -50px; margin-bottom: 20px; margin-left: -55px">
     <span style="font-size: 14px; margin-bottom: 37px"> (minilogue) </span>
     <span style="font-size: 2em; font-weight: bold; margin-left: 10px"
@@ -84,5 +118,11 @@ a {
 }
 a:visited {
   color: var(--text-primary-color);
+}
+</style>
+
+<style scoped>
+.left {
+  text-align: left;
 }
 </style>
