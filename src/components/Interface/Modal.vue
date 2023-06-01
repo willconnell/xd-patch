@@ -1,13 +1,8 @@
 <template>
-  <div>
-    <!-- button show -->
-    <button @click="showModal = true">show</button>
-    <!-- overlay -->
-    <div class="overlay" v-if="showModal" @click="showModal = false"></div>
-    <!-- modal -->
-    <div class="modal" v-if="showModal">
-      <title>close-circle-outline</title>
-      <div class="close" @click="showModal = false">
+  <div v-if="show">
+    <div class="overlay" @click="toggle"></div>
+    <div class="modal">
+      <div class="close" @click="toggle">
         <svg width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <title>close</title>
           <path
@@ -15,9 +10,10 @@
           />
         </svg>
       </div>
-
-      <h3>Title</h3>
-      <p>Description</p>
+      <div class="content">
+        <h3>Title</h3>
+        <p>Description</p>
+      </div>
     </div>
   </div>
 </template>
@@ -25,6 +21,7 @@
 <script>
 export default {
   name: "Modal",
+  props: ["show", "toggle"],
   data() {
     return {
       showModal: true,

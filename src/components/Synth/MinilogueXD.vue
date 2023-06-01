@@ -1,5 +1,4 @@
 <template>
-  <Modal v-if="showModal" />
   <div class="mainInterface">
     <!-- <div class="master section">
       <Knob label="master" />
@@ -176,19 +175,6 @@
   </div>
   <br />
   <button @click="requestDataDump" class="customBtn">GET KNOB POSITIONS</button>
-  <button
-    class="customBtn"
-    style="position: absolute; top: 15px; left: 15px"
-    @click="showModal = true"
-  >
-    Settings
-  </button>
-  <button
-    class="customBtn"
-    style="position: absolute; bottom: 15px; margin: auto"
-  >
-    buy me a coffee
-  </button>
 
   <!-- <div
     style="display: flex; direction: column; position: absolute; bottom: 30px"
@@ -239,17 +225,17 @@
 </template>
 
 <script>
-import parseSysex from "../utilities/sysex.js";
-import sampleData from "../utilities/sample.js";
+import parseSysex from "../../utilities/sysex.js";
+import sampleData from "../../utilities/sample.js";
 import {
   signals,
   twoWaySwitches,
   threeWaySwitches,
   fourWaySwitches,
-} from "../utilities/midi.js";
-import Knob from "./Interface/Knob";
-import Switch from "./Interface/Switch";
-import Modal from "./Modal";
+} from "../../utilities/midi.js";
+import Knob from "./Knob";
+import Switch from "./Switch";
+import Modal from "../Interface/Modal";
 import { mapMutations } from "vuex";
 
 export default {
@@ -370,6 +356,7 @@ export default {
         this.prog[signal_name] = (value / 127) * 1023;
       }
     },
+    toggleModal() {},
   },
 };
 </script>
@@ -411,22 +398,5 @@ export default {
 }
 .sr {
   margin-bottom: 15px;
-}
-.customBtn {
-  cursor: pointer;
-  display: block;
-  margin: auto;
-  background-color: var(--background-color-secondary);
-  color: var(--text-primary-color);
-  padding: 15px;
-  border-radius: 5px;
-  border: 1px solid var(--background-color-secondary);
-}
-.customBtn:hover {
-  border: 1px solid var(--accent-color);
-}
-
-.customBtn:active {
-  background-color: var(--accent-color);
 }
 </style>
