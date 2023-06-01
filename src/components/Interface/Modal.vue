@@ -22,7 +22,6 @@
           Minilogue XD, and all live knob changes will update in real time!
         </p>
         <br />
-        <br />
         <h3>Support</h3>
         <p class="left">
           Synthesizers: Korg Minilogue XD, Korg Minilogue XD Module
