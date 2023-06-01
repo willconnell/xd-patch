@@ -1,12 +1,11 @@
 <template>
   <ThemeSwitch />
-  <button
-    class="customBtn"
+  <Btn
     style="position: absolute; top: 15px; left: 15px"
-    @click="showModal = true"
+    @click="() => (showModal = true)"
   >
     Settings
-  </button>
+  </Btn>
   <Modal :show="showModal" :toggle="toggleModal" />
   <div style="margin-top: -50px; margin-bottom: 20px; margin-left: -55px">
     <span style="font-size: 14px; margin-bottom: 37px"> (minilogue) </span>
@@ -15,12 +14,16 @@
     >
   </div>
   <MinilogueXD />
+  <Btn style="position: absolute; bottom: 15px; left: 15px">
+    buy me a coffee
+  </Btn>
 </template>
 
 <script>
 import MinilogueXD from "./components/Synth/MinilogueXD.vue";
 import ThemeSwitch from "./components/Interface/ThemeSwitch.vue";
 import Modal from "./components/Interface/Modal.vue";
+import Btn from "./components/Interface/Btn.vue";
 
 export default {
   name: "App",
@@ -28,6 +31,7 @@ export default {
     MinilogueXD,
     ThemeSwitch,
     Modal,
+    Btn,
   },
   data() {
     return {

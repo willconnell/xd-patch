@@ -1,10 +1,5 @@
 <template>
   <div class="mainInterface">
-    <!-- <div class="master section">
-      <Knob label="master" />
-      <Knob label="tempo" />
-    </div> 
-    <div class="divider"></div> -->
     <div class="voice section">
       <Knob label="portamento" :value="(prog?.portamento / 127) * 1023" />
       <Knob label="voice mode depth" :value="prog?.voiceModeDepth" />
@@ -174,7 +169,7 @@
     </div>
   </div>
   <br />
-  <btn @click="requestDataDump">GET KNOB POSITIONS</btn>
+  <btn @click="requestDataDump" :large="true">GET KNOB POSITIONS</btn>
 
   <!-- <div
     style="display: flex; direction: column; position: absolute; bottom: 30px"
