@@ -10,9 +10,31 @@
           />
         </svg>
       </div>
-      <div class="content">
-        <h3>Title</h3>
-        <p>Description</p>
+      <div>
+        <h3>Instructions</h3>
+        <ol class="left">
+          <li>Allow MIDI access</li>
+          <li>Connect Korg Minilogue XD via USB</li>
+          <li>Press "GET KNOB POSITIONS"!</li>
+        </ol>
+        <p class="left">
+          The interface will now reflect the current true state of your
+          Minilogue XD, and all live knob changes will update in real time!
+        </p>
+        <br />
+        <br />
+        <h3>Support</h3>
+        <p class="left">
+          Synthesizers: Korg Minilogue XD, Korg Minilogue XD Module
+          <br />
+          Browsers: Chrome, Edge, Firefox, Opera. (see
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/API/Web_MIDI_API#browser_compatibility"
+            target="_blank"
+            >here</a
+          >
+          for detailed list)
+        </p>
       </div>
     </div>
   </div>
@@ -44,10 +66,10 @@ export default {
 .modal {
   display: block;
   position: fixed;
-  margin: 15% auto;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  width: 300px;
+  transform: translate(-50%, -50%);
+  width: 650px;
   z-index: 9999;
   padding: 20px 30px;
   background-color: var(--background-color-primary);
@@ -63,5 +85,8 @@ export default {
 }
 .close:hover {
   fill: var(--text-secondary-color);
+}
+.left {
+  text-align: left;
 }
 </style>

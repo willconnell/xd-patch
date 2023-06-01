@@ -171,7 +171,7 @@
   <br />
   <btn @click="requestDataDump" :large="true">{{ mainBtnText }}</btn>
   <div v-if="!accessGranted" class="warningMessage">
-    *(midi access not <a href="">enabled</a>)
+    *(midi access not enabled)
   </div>
   <div v-if="noDevicesFound" class="warningMessage">
     *(no midi devices <a href="">detected</a>)
