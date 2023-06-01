@@ -4,7 +4,7 @@
     style="position: absolute; top: 15px; left: 15px"
     @click="() => (showModal = true)"
   >
-    Settings
+    About
   </Btn>
   <Modal :show="showModal" :toggle="toggleModal" />
   <div style="margin-top: -50px; margin-bottom: 20px; margin-left: -55px">

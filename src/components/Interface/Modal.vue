@@ -35,6 +35,15 @@
           >
           for detailed list)
         </p>
+        <br />
+        <p style="margin-bottom: -10px">
+          <a href="https://github.com/willconnell" target="_blank">
+            <i class="fa fa-github"></i>
+          </a>
+          - built by
+          <a href="https://willconnell.me" target="_blank">Will Connell</a> -
+          2023
+        </p>
       </div>
     </div>
   </div>

@@ -169,13 +169,20 @@
     </div>
   </div>
   <br />
+  <br />
   <btn @click="requestDataDump" :large="true">{{ mainBtnText }}</btn>
   <div v-if="!accessGranted" class="warningMessage">
     *(midi access not enabled)
   </div>
-  <div v-if="noDevicesFound" class="warningMessage">
-    *(no midi devices <a href="">detected</a>)
+  <div v-if="accessGranted && noDevicesFound" class="warningMessage">
+    *(no midi devices
+    <span
+      @click="showDevices"
+      style="cursor: pointer; text-decoration: underline"
+      >detected</span
+    >)
   </div>
+  <Modal :show="showDevices" />
 
   <!-- <div
     style="display: flex; direction: column; position: absolute; bottom: 30px"
@@ -210,11 +217,14 @@
       -------changing preset auto updates interface
       -------live knob turning feature for all knobs
       add multi engine support for live knob turn feature
-      warning for users who don't have midi access enabled
-      investigate why poly/unison switch defaults to top position
-      midi channel selector
-      figure out how input/output midi UI will look
-      add instructions / settings / coffee Btn
+      -------warning for users who don't have midi access enabled
+      x------investigate why poly/unison switch defaults to top position
+      x------midi channel selector
+      -------figure out how input/output midi UI will look
+      -------add instructions / settings / coffee Btn
+      link up coffee button to account
+      create devices connected modal
+      set up link to github repository
 
       take demo footage
       edit footage into a nice demo video
