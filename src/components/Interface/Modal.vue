@@ -44,11 +44,22 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 650px;
   z-index: 9999;
   padding: 20px 30px;
   background-color: var(--background-color-primary);
   border-radius: 8px;
+}
+
+@media only screen and (min-width: 580px) {
+  .modal {
+    width: 500px;
+  }
+}
+
+@media only screen and (min-width: 735px) {
+  .modal {
+    width: 650px;
+  }
 }
 
 .close {

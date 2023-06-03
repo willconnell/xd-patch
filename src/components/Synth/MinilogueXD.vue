@@ -177,29 +177,34 @@
   <div v-if="accessGranted && noDevicesFound" class="warningMessage">
     *(no midi devices
     <span
-      @click="showDevices"
+      @click="() => (showModal = true)"
       style="cursor: pointer; text-decoration: underline"
       >detected</span
     >)
   </div>
-  <Modal :show="showDevices" />
-
-  <!-- <div
-    style="display: flex; direction: column; position: absolute; bottom: 30px"
-  >
-    <div style="width: 300px; text-align: left">
-      Inputs Deteced:
-      <ul v-for="device in inputs" :key="device">
-        <li style="">{{ device.name }}</li>
-      </ul>
+  <Modal :show="showModal" :toggle="toggleModal">
+    <div>
+      <h1 id="devicesTitle">Devices</h1>
+      <div class="left">
+        <h3>MIDI Inputs</h3>
+        <ul v-for="device in inputs" :key="device">
+          <li style="">{{ device.name }}</li>
+        </ul>
+        <ul v-if="inputs.length === 0">
+          <li>none detected.</li>
+        </ul>
+        <h3>MIDI Outputs</h3>
+        <ul v-for="device in outputs" :key="device">
+          <li style="">{{ device.name }}</li>
+        </ul>
+        <ul v-if="outputs.length === 0">
+          <li>none detected.</li>
+        </ul>
+      </div>
+      <br />
+      If you don't see your device, try refreshing or checking cables.
     </div>
-    <div style="width: 300px; text-align: left">
-      Outputs Deteced:
-      <ul v-for="device in outputs" :key="device">
-        <li style="">{{ device.name }}</li>
-      </ul>
-    </div>
-  </div> -->
+  </Modal>
 
   <!-- 
     next steps:
@@ -223,7 +228,7 @@
       -------figure out how input/output midi UI will look
       -------add instructions / settings / coffee Btn
       -------link up coffee button to account
-      create devices connected modal
+      -------create devices connected modal
       set up link to github repository
 
       take demo footage
@@ -254,7 +259,7 @@ export default {
   components: { Knob, Switch, Modal, Btn },
   data() {
     return {
-      showModal: true,
+      showModal: false,
       sample: 0,
       switchValue: 0,
       accessGranted: false,
@@ -368,7 +373,9 @@ export default {
         this.prog[signal_name] = (value / 127) * 1023;
       }
     },
-    toggleModal() {},
+    toggleModal() {
+      this.showModal = !this.showModal;
+    },
   },
   computed: {
     noDevicesFound() {
@@ -427,5 +434,11 @@ export default {
   margin: auto;
   font-size: 12px;
   margin-top: 8px;
+}
+#devicesTitle {
+  margin-top: -10px;
+}
+.left {
+  text-align: left;
 }
 </style>

@@ -71,6 +71,7 @@ export default {
   },
   data() {
     return {
+      // fixme: only show if user has never been to site before
       showModal: false,
     };
   },
