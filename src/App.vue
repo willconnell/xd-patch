@@ -30,6 +30,13 @@
           >here</a
         >
         for detailed list)
+        <br />
+        Troubleshoot MIDI connection
+        <span
+          style="cursor: pointer; text-decoration: underline"
+          @click="troubleshoot"
+          >here</span
+        >
       </p>
       <br />
       <p style="margin-bottom: -10px">
@@ -47,7 +54,7 @@
       >XD PATCH</span
     >
   </div>
-  <MinilogueXD />
+  <MinilogueXD :toggleDevices="toggleDevices" :showDevices="showDevices" />
   <a href="https://ko-fi.com/willconnell" target="_blank">
     <Btn style="position: absolute; bottom: 15px; left: 15px">
       buy me a coffee
@@ -73,11 +80,19 @@ export default {
     return {
       // fixme: only show if user has never been to site before
       showModal: false,
+      showDevices: false,
     };
   },
   methods: {
     toggleModal() {
       this.showModal = !this.showModal;
+    },
+    toggleDevices() {
+      this.showDevices = !this.showDevices;
+    },
+    troubleshoot() {
+      this.showModal = false;
+      this.showDevices = true;
     },
   },
 };

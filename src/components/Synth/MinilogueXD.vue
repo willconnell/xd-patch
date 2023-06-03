@@ -177,12 +177,12 @@
   <div v-if="accessGranted && noDevicesFound" class="warningMessage">
     *(no midi devices
     <span
-      @click="() => (showModal = true)"
+      @click="toggleDevices"
       style="cursor: pointer; text-decoration: underline"
       >detected</span
     >)
   </div>
-  <Modal :show="showModal" :toggle="toggleModal">
+  <Modal :show="showDevices" :toggle="toggleDevices">
     <div>
       <h1 id="devicesTitle">Devices</h1>
       <div class="left">
@@ -202,7 +202,7 @@
         </ul>
       </div>
       <br />
-      If you don't see your device, try refreshing or checking cables.
+      If you don't see your device, try refreshing the page or checking cables.
     </div>
   </Modal>
 
@@ -257,9 +257,9 @@ import { mapMutations } from "vuex";
 
 export default {
   components: { Knob, Switch, Modal, Btn },
+  props: ["toggleDevices", "showDevices"],
   data() {
     return {
-      showModal: false,
       sample: 0,
       switchValue: 0,
       accessGranted: false,
@@ -372,9 +372,6 @@ export default {
       } else {
         this.prog[signal_name] = (value / 127) * 1023;
       }
-    },
-    toggleModal() {
-      this.showModal = !this.showModal;
     },
   },
   computed: {
