@@ -222,7 +222,7 @@
       x------midi channel selector
       -------figure out how input/output midi UI will look
       -------add instructions / settings / coffee Btn
-      link up coffee button to account
+      -------link up coffee button to account
       create devices connected modal
       set up link to github repository
 

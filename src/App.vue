@@ -48,9 +48,11 @@
     >
   </div>
   <MinilogueXD />
-  <Btn style="position: absolute; bottom: 15px; left: 15px">
-    buy me a coffee
-  </Btn>
+  <a href="https://ko-fi.com/willconnell" target="_blank">
+    <Btn style="position: absolute; bottom: 15px; left: 15px">
+      buy me a coffee
+    </Btn>
+  </a>
 </template>
 
 <script>
