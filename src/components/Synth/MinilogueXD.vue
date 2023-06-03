@@ -230,13 +230,15 @@
       -------link up coffee button to account
       -------create devices connected modal
       set up link to github repository
+      -------show intro modal if user hasn't been to site before
 
       take demo footage
       edit footage into a nice demo video
       take clips of video and turn it into gifs
 
-      create simple personal website
-      set up hosting for both
+      -------create simple personal website
+      -------set up hosting for personal site
+      set up hosting for xd patch
   -->
 </template>
 

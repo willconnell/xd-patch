@@ -78,10 +78,13 @@ export default {
   },
   data() {
     return {
-      // fixme: only show if user has never been to site before
-      showModal: false,
+      // show intro modal if user has never been to site before
+      showModal: !localStorage.getItem("visitedBefore"),
       showDevices: false,
     };
+  },
+  mounted() {
+    localStorage.setItem("visitedBefore", true);
   },
   methods: {
     toggleModal() {
