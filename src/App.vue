@@ -48,17 +48,13 @@
       </p>
     </div>
   </Modal>
-  <div style="margin-top: -50px; margin-bottom: 20px; margin-left: -55px">
-    <span style="font-size: 14px; margin-bottom: 37px"> (minilogue) </span>
-    <span style="font-size: 2em; font-weight: bold; margin-left: 10px"
-      >XD PATCH</span
-    >
+  <div class="siteTitle">
+    <span id="minilogue"> (minilogue) </span>
+    <span id="xdpatch">XD PATCH</span>
   </div>
   <MinilogueXD :toggleDevices="toggleDevices" :showDevices="showDevices" />
   <a href="https://ko-fi.com/willconnell" target="_blank">
-    <Btn style="position: absolute; bottom: 15px; left: 15px">
-      buy me a coffee
-    </Btn>
+    <Btn id="coffee"> buy me a coffee </Btn>
   </a>
 </template>
 
@@ -145,5 +141,24 @@ a:visited {
 <style scoped>
 .left {
   text-align: left;
+}
+#coffee {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+}
+.siteTitle {
+  margin-top: -50px;
+  margin-bottom: 20px;
+  margin-left: -55px;
+}
+#minilogue {
+  font-size: 14px;
+  margin-bottom: 37px;
+}
+#xdpatch {
+  font-size: 2em;
+  font-weight: bold;
+  margin-left: 10px;
 }
 </style>

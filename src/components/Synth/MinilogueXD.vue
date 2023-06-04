@@ -399,6 +399,7 @@ export default {
   justify-content: space-between;
   /* background-color: var(--background-color-secondary); */
 }
+
 .section {
   padding: 1px;
   display: flex;
@@ -439,5 +440,23 @@ export default {
 }
 .left {
   text-align: left;
+}
+</style>
+
+<style>
+/* some custom styling for mobile */
+@media only screen and (max-width: 450px) {
+  .mainInterface {
+    flex-direction: column !important;
+  }
+  #coffee {
+    display: none;
+  }
+  #minilogue {
+    display: none;
+  }
+  .siteTitle {
+    margin-left: 0px !important;
+  }
 }
 </style>
