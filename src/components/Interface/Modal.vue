@@ -48,6 +48,14 @@ export default {
   padding: 20px 30px;
   background-color: var(--background-color-primary);
   border-radius: 8px;
+  overflow: scroll;
+}
+
+@media only screen and (max-width: 579px) {
+  .modal {
+    width: 80%;
+    height: 80%;
+  }
 }
 
 @media only screen and (min-width: 580px) {
