@@ -1,6 +1,7 @@
 const signals = {
   0x27: "vco1Level",
   0x05: "portamento",
+  0x06: "voiceModeType",
   0x10: "ampEGAttack",
   0x11: "ampEGDecay",
   0x12: "ampEGSustain",

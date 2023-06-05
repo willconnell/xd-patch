@@ -6,7 +6,7 @@
       <Switch
         :dots="true"
         :dotLabels="['poly', 'unison', 'chord', 'arp']"
-        :value="prog?.voiceModeType - 1"
+        :value="Math.max(prog?.voiceModeType - 1, 0)"
         :positions="4"
         style="margin-top: 0px; margin-bottom: 14px"
       />
@@ -369,9 +369,13 @@ export default {
         this.prog[signal_name] = value;
       } else if (signal_name === "multiString") {
         this.prog[signal_name] = multiSubTypes[this.prog.multiType][value];
+      } else if (signal_name === "voiceModeType") {
+        this.prog[signal_name] = value;
       } else {
         this.prog[signal_name] = (value / 127) * 1023;
       }
+
+      console.log("prog value", this.prog[signal_name]);
     },
   },
   computed: {
