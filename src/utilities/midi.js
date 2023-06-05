@@ -61,7 +61,7 @@ const signals = {
   // 0x : '88,96,104,112,128)',
   0x62: "NRPN (LSB)                               *3 ",
   0x63: "NRPN (MSB)                               *3 ",
-  0x67: "MULTI SUB TYPE SELECT                       ", // fixme: configure this
+  0x67: "multiString", // multi sub type
   // 0x : 'NOISE(vv=0,42,84,127)                  *2-22',
   // 0x : 'VPM(vv=0,8,16,24,32,40,48,56,64,72,80,',
   // 0x : '88,96,104,112,127)              *2-23',
@@ -82,7 +82,56 @@ const threeWaySwitches = new Set([
 ]);
 const fourWaySwitches = new Set([0x30, 0x31]);
 
-export { signals, twoWaySwitches, threeWaySwitches, fourWaySwitches };
+const multiSubTypes = {
+  // noise
+  0: { 0: "HIGH", 42: "LOW", 84: "PEAK", 127: "DECIM" },
+  // vpm
+  1: {
+    0: "SINE 1",
+    8: "SINE 2",
+    16: "SINE 3",
+    24: "SINE 4",
+    32: "SAW 1",
+    40: "SAW 2",
+    48: "SQUARE 1",
+    56: "SQUARE 2",
+    64: "FAT 1",
+    72: "FAT 2",
+    80: "AIR 1",
+    88: "AIR 2",
+    96: "DECAY 1",
+    104: "DECAY 2",
+    112: "CREEP",
+    127: "THROAT",
+  },
+  // user
+  2: {
+    0: "USER 1",
+    8: "USER 2",
+    16: "USER 3",
+    24: "USER 4",
+    32: "USER 5",
+    40: "USER 6",
+    48: "USER 7",
+    56: "USER 8",
+    64: "USER 9",
+    72: "USER 10",
+    80: "USER 11",
+    88: "USER 12",
+    96: "USER 13",
+    104: "USER 14",
+    112: "USER 15",
+    127: "USER 16",
+  },
+};
+
+export {
+  signals,
+  twoWaySwitches,
+  threeWaySwitches,
+  fourWaySwitches,
+  multiSubTypes,
+};
 
 /*
 +--------+---------+-------------+-----------------------------------------------------+

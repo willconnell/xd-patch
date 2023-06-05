@@ -59,7 +59,7 @@
           :value="prog?.multiType"
         />
         <div class="multiEngine">
-          {{ this.prog?.multiString }}
+          {{ multiString }}
         </div>
         <Knob label="shape" :value="prog?.multiShape" />
       </div>
@@ -221,7 +221,7 @@
       -------validate data with actual minilogue
       -------changing preset auto updates interface
       -------live knob turning feature for all knobs
-      add multi engine support for live knob turn feature
+      -------add multi engine support for live knob turn feature
       -------warning for users who don't have midi access enabled
       x------investigate why poly/unison switch defaults to top position
       x------midi channel selector
@@ -250,6 +250,7 @@ import {
   twoWaySwitches,
   threeWaySwitches,
   fourWaySwitches,
+  multiSubTypes,
 } from "../../utilities/midi.js";
 import Knob from "./Knob";
 import Switch from "./Switch";
@@ -314,11 +315,6 @@ export default {
         console.warn("MIDI access denied:", error);
       }
     },
-    /* at beginning of this function:
-        create a global vuex variable called like "transition" or something
-        enable it to true at the start of this function
-        turn it to false at the end of this function
-    */
     requestDataDump() {
       // Use transitions only when we request a data dump. This allows knob updates
       // to be instant for real time physical changes.
@@ -371,6 +367,8 @@ export default {
         this.prog[signal_name] = translation[value];
       } else if (signal_name === "portamento") {
         this.prog[signal_name] = value;
+      } else if (signal_name === "multiString") {
+        this.prog[signal_name] = multiSubTypes[this.prog.multiType][value];
       } else {
         this.prog[signal_name] = (value / 127) * 1023;
       }
@@ -384,6 +382,10 @@ export default {
       return !this.accessGranted || this.noDevicesFound
         ? "SEE SAMPLE DATA*"
         : "GET KNOB POSITIONS";
+    },
+    // korg's default is only a single user voice, so keep this for now
+    multiString() {
+      return this.prog?.multiType === 2 ? "USER" : this.prog?.multiString;
     },
   },
 };
