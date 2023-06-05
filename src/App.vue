@@ -40,7 +40,7 @@
       </p>
       <br />
       <p style="margin-bottom: -10px">
-        <a href="https://github.com/willconnell" target="_blank">
+        <a href="https://github.com/willconnell/xd-patch" target="_blank">
           <i class="fa fa-github"></i>
         </a>
         - built by
